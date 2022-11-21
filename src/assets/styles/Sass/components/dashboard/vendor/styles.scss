@@ -10,6 +10,9 @@
 .hr-rule {
   margin: 2rem 0;
 }
+.hr-rule1 {
+  margin: 1rem 0;
+}
 
 .vtext-primary {
   color: $color-primary;
@@ -45,7 +48,7 @@
 }
 
 .bg-black-pad::-webkit-scrollbar-thumb {
-  border-radius: 10px;
+  // border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #555;

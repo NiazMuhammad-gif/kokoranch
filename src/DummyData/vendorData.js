@@ -1,3 +1,61 @@
+export const VendorProductsDetails = [
+  {
+    code: "021",
+    uploadDate: "4-20-2022",
+    productName: "PRODUCT1",
+    mainCategory: "Fruit Category",
+    price: "$120.00",
+    status: "Pending",
+  },
+  {
+    code: "021",
+    uploadDate: "4-20-2022",
+    productName: "PRODUCT1",
+    mainCategory: "Fruit Category",
+    price: "$120.00",
+    status: "Pending",
+  },
+  {
+    code: "021",
+    uploadDate: "4-20-2022",
+    productName: "PRODUCT1",
+    mainCategory: "Fruit Category",
+    price: "$120.00",
+    status: "Pending",
+  },
+  {
+    code: "021",
+    uploadDate: "4-20-2022",
+    productName: "PRODUCT1",
+    mainCategory: "Fruit Category",
+    price: "$120.00",
+    status: "Pending",
+  },
+  {
+    code: "021",
+    uploadDate: "4-20-2022",
+    productName: "PRODUCT1",
+    mainCategory: "Fruit Category",
+    price: "$120.00",
+    status: "Pending",
+  },
+  {
+    code: "021",
+    uploadDate: "4-20-2022",
+    productName: "PRODUCT1",
+    mainCategory: "Fruit Category",
+    price: "$120.00",
+    status: "Pending",
+  },
+  {
+    code: "021",
+    uploadDate: "4-20-2022",
+    productName: "PRODUCT1",
+    mainCategory: "Fruit Category",
+    price: "$120.00",
+    status: "Pending",
+  },
+];
 export const vendorServiceOrders = [
   {
     orderNo: "021",

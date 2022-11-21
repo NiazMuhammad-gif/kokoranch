@@ -89,10 +89,20 @@
     & > .nav-link:focus,
     & > .nav-link:hover {
       background-color: #ffffff26;
+      
     }
 
     & > .active-nav {
       margin-left: 0;
+    }
+    & .vender-link {
+      border-radius: 2rem;
+        background-color: $color-white;
+        color: $color-primary;
+        width: 100%;
+        padding: 0.5rem;
+        fill: green;
+        stroke: $color-white;
     }
 
     & .vendor-link.active {

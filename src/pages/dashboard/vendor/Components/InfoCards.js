@@ -8,25 +8,34 @@ const InfoCards = ({ data, activeCard, setActiveCard }) => {
 
   return (
     <>
-      <div className="infocard-container">
-        {data.map((data) => {
-          return activeCard === data.topText ? (
-            <InfoCard
-              topText={data.topText}
-              bottomText={data.bottomText}
-              active
-            />
-          ) : (
-            <InfoCard topText={data.topText} bottomText={data.bottomText} />
-          );
-        })}
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div className="infocard-container">
+          {data.map((data) => {
+            return activeCard === data.topText ? (
+              <InfoCard
+                topText={data.topText}
+                bottomText={data.bottomText}
+                active
+                setActiveCard={setActiveCard}
+              />
+            ) : (
+              <InfoCard
+                topText={data.topText}
+                bottomText={data.bottomText}
+                setActiveCard={setActiveCard}
+              />
+            );
+          })}
+        </div>
+        <FilterIcon
+          width={20}
+          onClick={() => setShowFilterProp(!showFilterProp)}
+        />
       </div>
       <div
         className="so-top-filtericon"
         onClick={() => setShowFilterProp(!showFilterProp)}
-      >
-        <FilterIcon width={20} />
-      </div>
+      ></div>
       {showFilterProp && <FilterProp />}
     </>
   );

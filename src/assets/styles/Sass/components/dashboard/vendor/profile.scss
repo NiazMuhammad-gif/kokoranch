@@ -10,7 +10,7 @@
   flex-direction: column;
   border: none;
   // background-color: $color-secondary;
-  // background-color: salmon;
+  background-color: #1e1e1e;
   @include respond(laptop-sm) {
     padding: 4rem 1rem;
   }

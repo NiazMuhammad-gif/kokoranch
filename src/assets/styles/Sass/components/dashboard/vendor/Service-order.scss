@@ -8,6 +8,7 @@
   //   background-color: darkgoldenrod;
 }
 .soi-orderNo {
+  color:$color-primary;
 }
 
 .soi-main {
@@ -24,6 +25,10 @@
       text-align: right;
     }
   }
+  .active-color{
+    color:$color-primary;
+  }
+  
   .soi-main-services {
     h3 {
       color: $color-primary;
@@ -123,6 +128,7 @@
     background-color: $color-primary;
     border-radius: 50%;
   }
+
   h3 {
     text-align: center;
     margin: 1.5rem 0 2rem 0;

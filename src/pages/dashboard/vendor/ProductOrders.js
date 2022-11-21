@@ -15,7 +15,7 @@ import FormControlAuth from "./Components/formControl";
 import TableComponent from "./Components/Table";
 import SearchBar from "./Components/SearchBar";
 
-function VendorServiceOrders({ setSidebar, sidebar }) {
+function VendorProductOrders({ setSidebar, sidebar }) {
   const [tableHeadData, seTableHeadData] = useState([
     { id: "orderNo", label: "Order No" },
     { id: "userId", label: "User Id" },
@@ -101,7 +101,7 @@ function VendorServiceOrders({ setSidebar, sidebar }) {
       <NavBar
         setSidebar={setSidebar}
         sidebar={sidebar}
-        title="Service Orders"
+        title="Product Orders"
       />
 
       <article className="vendor-profile-main">
@@ -147,7 +147,7 @@ function VendorServiceOrders({ setSidebar, sidebar }) {
                 <TableComponent
                   tHeadData={tableHeadData}
                   tRowData={tableRowData}
-                  edit={"serviceOrder"}
+                  edit={"productOrderDetails"}
                   activeCard={"total"}
                 />
               </div>
@@ -159,4 +159,4 @@ function VendorServiceOrders({ setSidebar, sidebar }) {
   );
 }
 
-export default VendorServiceOrders;
+export default VendorProductOrders;

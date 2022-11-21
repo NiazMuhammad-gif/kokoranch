@@ -19,6 +19,7 @@ import { ReactComponent as Medal } from "../../../assets/images/icons/medal.svg"
 import { ReactComponent as Ratings } from "../../../assets/images/icons/ratings.svg";
 import { ReactComponent as Settings } from "../../../assets/images/icons/settings.svg";
 import { ReactComponent as Shipping } from "../../../assets/images/icons/shipping.svg";
+import { ReactComponent as Logout } from "../../../assets/images/icons/logout.svg";
 import Images from "../../../constants/images";
 import { LOGOUT } from "../../../redux/actions/authentication";
 
@@ -49,82 +50,91 @@ export default function VendorSideBar({ children }) {
             </span>
           </div>
 
-          <h4 className="fs-4 title-color">Vendor Dashboard</h4>
-          <h4 className="fs-4">
-            <NavLink to="/vendor-profile" className="vendor-link">
-              <div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <h4 className="fs-4 title-color">Vendor Dashboard</h4>
+            <div>
+              <h4 className="fs-5 text-bold">
+                {/* <Link
+                to={"/"}
+                onClick={(e) => {
+                  e.preventDefault();
+                  dispatch(LOGOUT(navigate));
+                }} */}
+                {/* > */}
+                <FaSignOutAlt />
+                {/* <Logout width={15} fill="white" /> */}
+                &nbsp;Logout
+                {/* </Link> */}
+              </h4>
+            </div>
+          </div>
+          <h4 className="fs-5">
+            <NavLink to="/" className="vendor-link" end>
+              <div className="vendor-inbox-link">
                 <FaRegUser />
-                {/* <img
-                src={wineBottle}
-                style={{ width: "8%", marginRight: "5px" }}
-              /> */}
                 &nbsp; My Profile
               </div>
             </NavLink>
           </h4>
-          <h4 className="fs-4">
-            {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
-            <div>
-              <WineBottle width={15} />
-              &nbsp; My Products
-            </div>
-            {/* </NavLink> */}
+          <h4 className="fs-5">
+            <NavLink to="/my-products" className="vendor-link">
+              <div className="vendor-inbox-link">
+                <WineBottle width={15} />
+                &nbsp; My Products
+              </div>
+            </NavLink>
           </h4>
-          <h4 className="fs-4">
-            {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
-            <div>
-              {/* <img
-                src={agriService}
-                style={{ width: "8%", marginRight: "5px" }}
-              /> */}
-              <AgriService width={15} />
-              &nbsp; My Agricultural Services
-            </div>
-            {/* </NavLink> */}
+          <h4 className="fs-5">
+            <NavLink to="/agricultural-services" className="vendor-link">
+              <div className="vendor-inbox-link">
+                <AgriService width={15} />
+                &nbsp; My Agricultural Services
+              </div>
+            </NavLink>
           </h4>
-          <h4 className="fs-4">
-            {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
-            <div className="vendor-inbox-link">
-              {/* <img src={shipping} style={{ width: "8%", marginRight: "5px" }} /> */}
-              <Shipping width={15} />
-              &nbsp; Product Shipping Details
-            </div>
-            {/* </NavLink> */}
+          <h4 className="fs-5">
+            <NavLink
+              to="/vendor-productshippingdetails"
+              className="vendor-link"
+            >
+              <div className="vendor-inbox-link">
+                {/* <img src={shipping} style={{ width: "8%", marginRight: "5px" }} /> */}
+                <Shipping width={15} />
+                &nbsp; Product Shipping Details
+              </div>
+            </NavLink>
           </h4>
-          <h4 className="fs-4">
-            {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
-            <div className="vendor-inbox-link">
-              {/* <img src={medal} style={{ width: "8%", marginRight: "5px" }} /> */}
-              <Medal width={15} />
-              &nbsp; Featured Products And Services
-            </div>
-            {/* </NavLink> */}
+          <h4 className="fs-5">
+            <NavLink to="/featured-products-services" className="vendor-link">
+              <div className="vendor-inbox-link">
+                <Medal width={15} />
+                &nbsp; Featured Products And Services
+              </div>
+            </NavLink>
           </h4>
-          <h4 className="fs-4">
-            {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
-            <div className="vendor-inbox-link">
-              {/* <img
-                src={featherList}
-                style={{ width: "8%", marginRight: "5px" }}
-              /> */}
-              <FeatherList width={15} />
-              &nbsp; Product Orders
-            </div>
-            {/* </NavLink> */}
+          <h4 className="fs-5">
+            <NavLink to="/vendor-productorders" className="vendor-link">
+              <div className="vendor-inbox-link">
+                <FeatherList width={15} />
+                &nbsp; Product Orders
+              </div>
+            </NavLink>
           </h4>
-          <h4 className="fs-4">
-            {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
-            <div className="vendor-inbox-link">
-              {/* <img
-                src={featherList}
-                style={{ width: "8%", marginRight: "5px" }}
-              /> */}
-              <FeatherList width={15} />
-              &nbsp; Service Orders
-            </div>
-            {/* </NavLink> */}
+          <h4 className="fs-5">
+            <NavLink to="/vendor-serviceorders" className="vendor-link">
+              <div className="vendor-inbox-link">
+                <FeatherList width={15} />
+                &nbsp; Service Orders
+              </div>
+            </NavLink>
           </h4>
-          <h4 className="fs-4">
+          <h4 className="fs-5">
             {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
             <div className="vendor-inbox-link">
               {/* <img src={inbox} style={{ width: "8%", marginRight: "5px" }} /> */}
@@ -134,7 +144,7 @@ export default function VendorSideBar({ children }) {
             </div>
             {/* </NavLink> */}
           </h4>
-          <h4 className="fs-4">
+          <h4 className="fs-5">
             {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
             <div className="vendor-inbox-link">
               {/* <img src={ratings} style={{ width: "8%", marginRight: "5px" }} /> */}
@@ -144,7 +154,7 @@ export default function VendorSideBar({ children }) {
             </div>
             {/* </NavLink> */}
           </h4>
-          <h4 className="fs-4">
+          <h4 className="fs-5">
             {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
             <div className="vendor-inbox-link">
               {/* <img
@@ -156,7 +166,7 @@ export default function VendorSideBar({ children }) {
             </div>
             {/* </NavLink> */}
           </h4>
-          <h4 className="fs-4">
+          <h4 className="fs-5">
             {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
             <div className="vendor-inbox-link">
               {/* <img
@@ -181,27 +191,27 @@ export default function VendorSideBar({ children }) {
               </div>
             </NavLink>
           </h4> */}
-          <div style={{ marginTop: "4rem" }}>
-            <h4 className="fs-4 text-bold">
-              {/* <Link
+          {/* <div style={{ marginTop: "4rem" }}>
+            <h4 className="fs-5 text-bold"> */}
+          {/* <Link
                 to={"/"}
                 onClick={(e) => {
                   e.preventDefault();
                   dispatch(LOGOUT(navigate));
                 }} */}
-              {/* > */}
-              <FaSignOutAlt />
+          {/* > */}
+          {/* <FaSignOutAlt />
               &nbsp;Logout
               {/* </Link> */}
-            </h4>
-          </div>
+          {/* </h4>
+          </div> */}
 
-          <h4 className="fs-4 ">
-            Switch To <span className="title-color">Vendor</span>
+          <h4 className="fs-5 ">
+            Switch To <span className="title-color">Trader</span>
           </h4>
-          <h4 className="fs-4 ">
+          {/* <h4 className="fs-5 ">
             Switch To <span className="title-color">Buyer</span>
-          </h4>
+          </h4> */}
         </aside>
         <main>{childrenWithProps}</main>
       </div>

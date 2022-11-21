@@ -4,12 +4,15 @@ const InfoCard = ({
   topText = "Top Text",
   bottomText = "22",
   active,
-  onClickFunction = () => null,
+  setActiveCard,
 }) => {
   return (
     <div
       className={`vendor-infocard ${active && "border-primary"}`}
-      onClick={() => onClickFunction()}
+      onClick={() => {
+        console.log(active, topText);
+        return !active ? setActiveCard(topText) : null;
+      }}
     >
       <h5>{topText}</h5>
       <div className="infocard-divider"></div>
