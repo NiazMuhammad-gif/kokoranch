@@ -10,8 +10,8 @@ const ServiceDetails = ({ setSidebar, sidebar }) => {
 
   console.log(location);
   const [popupOpen, setPopupOpen] = useState(false);
-  const [deletePopup, setDeletePopup] = useState(false);
   const [successfulPopup, setSuccessfulPopup] = useState(false);
+  const [deletePopup, setDeletePopup] = useState(false);
   const [deleteSuccessfulPopup, setDeleteSuccessfulPopup] = useState(false);
   const [orderStatus, setOrderStatus] = useState("completed");
   return (
@@ -202,7 +202,11 @@ const ServiceDetails = ({ setSidebar, sidebar }) => {
               </button>
               <button
                 className="btn btn-solid btn-solid-process soi-btn "
-                onClick={() => setPopupOpen(true)}
+                onClick={() =>
+                  navigate("/make-it-featured", {
+                    state: { service: true },
+                  })
+                }
                 style={{ width: "fit-content" }}
               >
                 Make it Featured

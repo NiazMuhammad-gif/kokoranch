@@ -33,7 +33,7 @@ function VendorProducts({ setSidebar, sidebar }) {
     },
     {
       code: "01",
-      updateDate: "24-01-22",
+      updateDate: "24-02-22",
       productName: "product1",
       mainCategory: "Main Category",
       price: "$21.00",
@@ -42,7 +42,7 @@ function VendorProducts({ setSidebar, sidebar }) {
     },
     {
       code: "01",
-      updateDate: "24-01-22",
+      updateDate: "24-03-22",
       productName: "product1",
       mainCategory: "Main Category",
       price: "$21.00",
@@ -51,7 +51,7 @@ function VendorProducts({ setSidebar, sidebar }) {
     },
     {
       code: "01",
-      updateDate: "24-01-22",
+      updateDate: "24-04-22",
       productName: "product1",
       mainCategory: "Main Category",
       price: "$21.00",
@@ -60,7 +60,7 @@ function VendorProducts({ setSidebar, sidebar }) {
     },
     {
       code: "01",
-      updateDate: "24-01-22",
+      updateDate: "24-05-22",
       productName: "product1",
       mainCategory: "Main Category",
       price: "$21.00",
@@ -85,6 +85,9 @@ function VendorProducts({ setSidebar, sidebar }) {
   const [activeCard, setActiveCard] = useState(filterCard[0].topText);
   const [deletePopup, setDeletePopup] = useState(false);
   const [deleteSuccessfulPopup, setDeleteSuccessfulPopup] = useState(false);
+  const [category, setCategory] = useState("");
+  const [subCategory, setSubCategory] = useState("");
+  const [subSubcategory, setSubSubCategory] = useState("");
   return (
     <>
       <Popup open={deletePopup} setOpen={setDeletePopup}>
@@ -167,60 +170,61 @@ function VendorProducts({ setSidebar, sidebar }) {
             <div style={{ marginTop: "20px", color: "white" }}>
               <div style={{ marginLeft: "20px" }}>
                 <h4>Filter By Your Categories</h4>
-                <FormControlAuth />
+                <FormControlAuth setCategory={setCategory} />
+                {category && (
+                  <FormControlAuth
+                    setSubCategory={setSubCategory}
+                    isSubCategory
+                  />
+                )}
+                {subCategory && (
+                  <FormControlAuth
+                    setSubSubCategory={setSubSubCategory}
+                    isSubCategory
+                  />
+                )}
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  // width: "100%",
-                  marginBottom: "0px",
-                }}
-              >
-                <h4 style={{ marginLeft: "20px" }}>Product List</h4>
-                <button
-                  onClick={() => {
-                    navigate("/my-products/add-product", {
-                      state: { addProduct: true },
-                    });
-                  }}
-                  className="btn btn-solid btn-solid-primary table-btn"
-                  style={{
-                    marginRight: "20px",
-                    paddingLeft: "20px",
-                    paddingRight: "20PX",
-                    width: "120px",
-                  }}
-                >
-                  <div
+              <div className="row">
+                <div className="col-5">
+                  <h4 style={{ marginLeft: "20px" }}>Product List:</h4>
+                </div>
+                <div className="col-7 d-flex justify-content-end">
+                  <button
+                    onClick={() => {
+                      navigate("/my-products/add-product", {
+                        state: { addProduct: true },
+                      });
+                    }}
+                    className="btn btn-solid btn-solid-primary table-btn"
                     style={{
-                      // backgroundColor: "white",
-                      margin: "5px",
-                      display: "flex",
-                      justifyContent: "flex-start",
+                      marginRight: "20px",
+                      // paddingLeft: "20px",
+                      // paddingRight: "20px",
+                      width: "fit-content",
                     }}
                   >
-                    <PlusIcon fill="white" width={17} />
-                  </div>
-                  Add Product
-                </button>
+                    <div
+                      style={{
+                        // backgroundColor: "white",
+                        margin: "5px",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                      }}
+                    >
+                      <PlusIcon fill="white" width={17} />
+                    </div>
+                    Add Product
+                  </button>
+                </div>
               </div>
-              <div
-                style={{
-                  width: "95%",
-                  margin: "20px",
-                }}
-              >
-                <TableComponent
-                  tHeadData={tableHeadData}
-                  tRowData={tableRowData}
-                  edit={"products"}
-                  activeCard={"total"}
-                  open={deletePopup}
-                  setOpen={setDeletePopup}
-                />
-              </div>
+              <TableComponent
+                tHeadData={tableHeadData}
+                tRowData={tableRowData}
+                edit={"products"}
+                activeCard={"total"}
+                open={deletePopup}
+                setOpen={setDeletePopup}
+              />
             </div>
           </div>
         </div>

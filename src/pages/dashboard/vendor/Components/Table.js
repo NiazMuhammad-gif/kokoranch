@@ -13,6 +13,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { useNavigate } from "react-router-dom";
 import { Grid } from "@mui/material";
+import { IndeterminateCheckBox } from "@mui/icons-material";
 const columns = [
   { id: "name", label: "Name", minWidth: 170 },
   { id: "code", label: "ISO\u00a0Code", minWidth: 100 },
@@ -93,24 +94,28 @@ const TableComponent = ({
   return (
     <Paper
       sx={{
-        minWidth: "50px",
-        overflow: "hidden",
+        margin: "20px",
+        border: "1px solid white",
+        // borderColor: "white",
       }}
-      elevation={24}
+      // elevation={24}
     >
-      <TableContainer style={{ minWidth: "50px" }}>
+      <TableContainer
+        className="scroll-bar-hide"
+        sx={{
+          maxHeight: "360px",
+          maxWidth: "80vw",
+          backgroundColor: "white",
+        }}
+      >
         <Table
           size="medium"
           stickyHeader
-          // aria-label="sticky table"
+          aria-label="sticky table"
           sx={{
-            minWidth: "50px",
-            backgroundColor: "#1e1e1e",
             color: "white",
-            // width: "100%",
-            overflow: "auto",
-            marginRight: "auto",
-            marginLeft: "auto",
+            overflowX: "scroll",
+            backgroundColor: "white",
           }}
         >
           <TableHead>
@@ -135,9 +140,9 @@ const TableComponent = ({
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row, index) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                  <TableRow key={index} hover role="checkbox" tabIndex={-1}>
                     {tHeadData.map((column) => {
-                      console.log(column.id, row[column.id]);
+                      // console.log(column.id, row[column.id]);
                       const value = row[column.id];
                       return (
                         <TableCell
@@ -176,6 +181,10 @@ const TableComponent = ({
                                     navigate("/my-products/details", {
                                       state: { data: row },
                                     });
+                                  } else if (edit == "featured") {
+                                    navigate(
+                                      "/make-it-featured/view-featured-details"
+                                    );
                                   }
                                 }}
                               >
@@ -205,8 +214,8 @@ const TableComponent = ({
                                 )
                               )}
                             </div>
-                          ) : column.format && typeof value === "number" ? (
-                            column.format(value)
+                          ) : column.id == "price" ? (
+                            `$${value}`
                           ) : (
                             value
                           )}
@@ -220,8 +229,11 @@ const TableComponent = ({
         </Table>
       </TableContainer>
       <TablePagination
-        sx={{ minWidth: "50px", backgroundColor: "#1e1e1e", color: "white" }}
-        rowsPerPageOptions={[10, 25, 100]}
+        sx={{
+          backgroundColor: "#1e1e1e",
+          color: "white",
+        }}
+        rowsPerPageOptions={[5, 10, 100]}
         component="div"
         count={tRowData.length}
         rowsPerPage={rowsPerPage}

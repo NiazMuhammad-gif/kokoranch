@@ -71,7 +71,7 @@ function Featured({ setSidebar, sidebar }) {
         title="Product Orders"
       />
 
-      <article className="vendor-profile-main">
+      <article className="vendor-profile-main" style={{ position: "relative" }}>
         <div>
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <FilterIcon
@@ -158,6 +158,7 @@ function Featured({ setSidebar, sidebar }) {
               <TableComponent
                 tHeadData={tableHeadData}
                 tRowData={tableRowData}
+                edit={"featured"}
                 activeCard={"total"}
               />
             </div>

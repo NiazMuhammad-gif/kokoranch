@@ -333,7 +333,7 @@ function EditProductDetails({ sidebar, setSidebar }) {
               onClick={() => {
                 setSuccessfulPopup(true);
               }}
-              className="btn btn-solid btn-solid-primary table-btn"
+              className="btn btn-solid btn-solid-primary-rounded table-btn"
               style={{
                 marginRight: "20px",
                 paddingLeft: "20px",
@@ -350,7 +350,30 @@ function EditProductDetails({ sidebar, setSidebar }) {
                   justifyContent: "flex-start",
                 }}
               ></div>
-              Save
+              Update
+            </button>
+            <button
+              onClick={() => {
+                navigate(-1);
+              }}
+              className="btn btn-solid btn-outline-primary-rounded table-btn"
+              style={{
+                marginRight: "20px",
+                paddingLeft: "20px",
+                paddingRight: "20PX",
+                width: "200px",
+                height: "40px",
+              }}
+            >
+              <div
+                style={{
+                  // backgroundColor: "white",
+                  margin: "5px",
+                  display: "flex",
+                  justifyContent: "flex-start",
+                }}
+              ></div>
+              Cancel
             </button>
           </div>
         </div>

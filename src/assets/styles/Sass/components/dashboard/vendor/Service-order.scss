@@ -12,8 +12,8 @@
 }
 
 .soi-main {
-  border-left: 1px solid $color-text-2;
-  border-right: 1px solid $color-text-2;
+  border: 1px solid $color-text-2;
+  // border-right: 1px solid $color-text-2;
 
   padding: 1rem 3rem;
 
@@ -49,7 +49,9 @@
     letter-spacing: 1px;
   }
 }
-
+.border-rounded{
+  border-radius: 15px;
+}
 .soi-update-status {
   padding: 4rem 3rem;
   display: flex;

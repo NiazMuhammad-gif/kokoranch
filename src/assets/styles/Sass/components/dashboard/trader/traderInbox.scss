@@ -304,16 +304,20 @@
       & .you .message {
         background-color: $color-grey;
         color: $color-grey-light;
+        border-radius: 20px;
       }
       & .me .message {
         background-color: $color-primary;
+        border-radius: 20px;
       }
     }
     & footer {
       height: 100%;
+      
       padding: 0.5rem;
       & .input-wrapper {
         position: relative;
+        bottom: 30%;
         &::before {
           position: absolute;
           top: 20%;

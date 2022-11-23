@@ -8,6 +8,7 @@ import Popup from "../../../components/popUp/popUp";
 import { TiTick } from "react-icons/ti";
 import { FaExclamation } from "react-icons/fa";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 function VendorServices({ setSidebar, sidebar }) {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function VendorServices({ setSidebar, sidebar }) {
     { id: "code", label: "code" },
     { id: "updateDate", label: "Update Date" },
     { id: "serviceName", label: "Service Name" },
-    { id: "mainCategory", label: "Main Category" },
+    { id: "mainCategory", label: "Category" },
     { id: "price", label: "Price" },
     { id: "status", label: "Status" },
     { id: "action", label: "Action" },
@@ -24,46 +25,46 @@ function VendorServices({ setSidebar, sidebar }) {
   const [tableRowData, setTableRowData] = useState([
     {
       code: "01",
-      updateDate: "24-01-22",
+      updateDate: "2022-04-08",
       serviceName: "Service",
-      mainCategory: "Main Category",
-      price: "$21.00",
+      mainCategory: "Landscaping",
+      price: "21.00",
       status: "Active",
       action: "Action",
     },
     {
-      code: "01",
-      updateDate: "24-01-22",
+      code: "02",
+      updateDate: "2022-04-06",
       serviceName: "Service",
-      mainCategory: "Main Category",
-      price: "$21.00",
+      mainCategory: "Landscaping",
+      price: "22.00",
       status: "Active",
       action: "Action",
     },
     {
-      code: "01",
-      updateDate: "24-01-22",
+      code: "03",
+      updateDate: "2022-04-05",
       serviceName: "Service",
-      mainCategory: "Main Category",
-      price: "$21.00",
+      mainCategory: "lawn Mowing",
+      price: "23.00",
       status: "Featured",
       action: "Action",
     },
     {
-      code: "01",
-      updateDate: "24-01-22",
+      code: "04",
+      updateDate: "2022-04-04",
       serviceName: "Service",
-      mainCategory: "Main Category",
-      price: "$21.00",
+      mainCategory: "Tree Services",
+      price: "24.00",
       status: "Inactive",
       action: "Action",
     },
     {
-      code: "01",
-      updateDate: "24-01-22",
+      code: "05",
+      updateDate: "2022-04-03",
       serviceName: "Service",
-      mainCategory: "Main Category",
-      price: "$21.00",
+      mainCategory: "tractor Repair",
+      price: "25.00",
       status: "Inactive",
       action: "Action",
     },
@@ -85,6 +86,70 @@ function VendorServices({ setSidebar, sidebar }) {
   const [activeCard, setActiveCard] = useState(filterCard[0].topText);
   const [deletePopup, setDeletePopup] = useState(false);
   const [deleteSuccessfulPopup, setDeleteSuccessfulPopup] = useState(false);
+  const [rowData, setRowData] = useState(tableRowData);
+  const [category, setCategory] = useState("");
+  const [options, setOptions] = useState([
+    "All",
+    "Landscaping",
+    "lawn Mowing",
+    "Tree Services",
+    "tractor Repair",
+  ]);
+
+  const [sortData, setSortData] = useState("");
+
+  useEffect(() => {
+    let temp = [];
+    if (activeCard == "All Services") {
+      temp = tableRowData;
+      console.log("all");
+    } else if (activeCard == "Active Services") {
+      console.log("active");
+      temp = tableRowData.filter((item) => item.status == "Active");
+    } else if (activeCard == "Inactive Services") {
+      console.log("inactive");
+      temp = tableRowData.filter((item) => item.status == "Inactive");
+    }
+    setRowData(temp);
+  }, [activeCard]);
+  useEffect(() => {
+    if (sortData) {
+      let temp = [];
+      if (sortData == "asc") {
+        temp = rowData.sort((a, b) => {
+          return (
+            Number(new Date(a.updateDate)) - Number(new Date(b.updateDate))
+          );
+        });
+      } else if (sortData == "dec") {
+        temp = rowData.sort((a, b) => {
+          return (
+            Number(new Date(b.updateDate)) - Number(new Date(a.updateDate))
+          );
+        });
+      } else if (sortData == "low") {
+        temp = rowData.sort((a, b) => {
+          return Number(a.price) - Number(b.price);
+        });
+      } else if (sortData == "high") {
+        temp = rowData.sort((a, b) => {
+          return Number(b.price) - Number(a.price);
+        });
+      }
+
+      setRowData(temp);
+    }
+  }, [sortData]);
+  useEffect(() => {
+    console.log(category);
+    if (category == "All") {
+      setRowData([...tableRowData]);
+    } else if (category) {
+      const temp = tableRowData.filter((item) => item.mainCategory == category);
+
+      setRowData(temp);
+    }
+  }, [category]);
   return (
     <>
       <Popup open={deletePopup} setOpen={setDeletePopup}>
@@ -154,6 +219,8 @@ function VendorServices({ setSidebar, sidebar }) {
             data={filterCard}
             activeCard={activeCard}
             setActiveCard={setActiveCard}
+            sortData={sortData}
+            setSortData={setSortData}
           />
         </div>
         <div
@@ -171,60 +238,50 @@ function VendorServices({ setSidebar, sidebar }) {
             <div style={{ marginTop: "20px", color: "white" }}>
               <div style={{ marginLeft: "20px" }}>
                 <h4>Filter By Your Categories</h4>
-                <FormControlAuth />
+                <FormControlAuth options={options} setCategory={setCategory} />
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  // width: "100%",
-                  marginBottom: "0px",
-                }}
-              >
-                <h4 style={{ marginLeft: "20px" }}>Service List</h4>
-                <button
-                  onClick={() => {
-                    navigate("/agricultural-services/add-service", {
-                      state: { addProduct: true },
-                    });
-                  }}
-                  className="btn btn-solid btn-solid-primary table-btn"
-                  style={{
-                    marginRight: "20px",
-                    paddingLeft: "20px",
-                    paddingRight: "20PX",
-                    width: "120px",
-                  }}
-                >
-                  <div
+              <div className="row">
+                <div className="col-5">
+                  <h4 style={{ marginLeft: "20px" }}>Service List:</h4>
+                </div>
+                <div className="col-7 d-flex justify-content-end">
+                  <button
+                    onClick={() => {
+                      navigate("/agricultural-services/add-service", {
+                        state: { addProduct: true },
+                      });
+                    }}
+                    className="btn btn-solid btn-solid-primary table-btn"
                     style={{
-                      // backgroundColor: "white",
-                      margin: "5px",
-                      display: "flex",
-                      justifyContent: "flex-start",
+                      marginRight: "20px",
+                      // paddingLeft: "20px",
+                      // paddingRight: "20px",
+                      width: "fit-content",
                     }}
                   >
-                    <PlusIcon fill="white" width={17} />
-                  </div>
-                  Add Service
-                </button>
+                    <div
+                      style={{
+                        // backgroundColor: "white",
+                        margin: "5px",
+                        display: "flex",
+                        justifyContent: "flex-start",
+                      }}
+                    >
+                      <PlusIcon fill="white" width={17} />
+                    </div>
+                    Add Service
+                  </button>
+                </div>
               </div>
-              <div
-                style={{
-                  width: "95%",
-                  margin: "20px",
-                }}
-              >
-                <TableComponent
-                  tHeadData={tableHeadData}
-                  tRowData={tableRowData}
-                  edit={"services"}
-                  activeCard={"total"}
-                  open={deletePopup}
-                  setOpen={setDeletePopup}
-                />
-              </div>
+
+              <TableComponent
+                tHeadData={tableHeadData}
+                tRowData={rowData}
+                edit={"services"}
+                activeCard={"total"}
+                open={deletePopup}
+                setOpen={setDeletePopup}
+              />
             </div>
           </div>
         </div>

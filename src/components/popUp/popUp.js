@@ -13,6 +13,7 @@ export default function Popup(props) {
         onHide={() => setOpen(false)}
         aria-labelledby="contained-modal-title-vcenter"
         centered
+        contentClassName="border-rounded"
       >
         <div className="close-icon">
           <span

@@ -11,6 +11,7 @@ import { ReactComponent as PlusIcon } from "../../../assets/images/icons/icons8-
 import NavBar from "./NavBar";
 import InfoCards from "./Components/InfoCards";
 import Table from "./Components/Table";
+import { Paper } from "@mui/material";
 import FormControlAuth from "./Components/formControl";
 import TableComponent from "./Components/Table";
 import SearchBar from "./Components/SearchBar";
@@ -110,6 +111,7 @@ function VendorProductOrders({ setSidebar, sidebar }) {
             data={filterCard}
             activeCard={activeCard}
             setActiveCard={setActiveCard}
+            featured1={true}
           />
         </div>
         <div
@@ -123,7 +125,7 @@ function VendorProductOrders({ setSidebar, sidebar }) {
             color: "black",
           }}
         >
-          <div className=" col-md-12">
+          <div className="col-12 col-md-12">
             <div style={{ marginTop: "20px", color: "white" }}>
               <div
                 style={{
@@ -131,6 +133,7 @@ function VendorProductOrders({ setSidebar, sidebar }) {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   width: "95%",
+                  height: "100%",
                 }}
               >
                 <h4 style={{ marginLeft: "20px" }}>Total Orders</h4>
@@ -138,19 +141,12 @@ function VendorProductOrders({ setSidebar, sidebar }) {
                   <SearchBar />
                 </div>
               </div>
-              <div
-                style={{
-                  width: "95%",
-                  margin: "20px",
-                }}
-              >
-                <TableComponent
-                  tHeadData={tableHeadData}
-                  tRowData={tableRowData}
-                  edit={"productOrderDetails"}
-                  activeCard={"total"}
-                />
-              </div>
+              <TableComponent
+                tHeadData={tableHeadData}
+                tRowData={tableRowData}
+                edit={"productOrderDetails"}
+                activeCard={"total"}
+              />
             </div>
           </div>
         </div>

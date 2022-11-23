@@ -13,6 +13,14 @@ const FormControlAuth = ({
   isSelectInput,
   selectId = "default",
   selectName = "defaultname",
+  category = "select category",
+  subCategory = "select sub category",
+  subSubCategory = "select sub sub category",
+  isSubCategory,
+  isSubSubCategory,
+  setCategory,
+  setSubCategory,
+  setSubSubCategory,
   options = ["option1", "option2", "option3"],
   noLabel,
   placeHolder = "",
@@ -29,11 +37,16 @@ const FormControlAuth = ({
   const [age, setAge] = useState("");
   const handleChange = (event) => {
     setAge(event.target.value);
+    isSubCategory
+      ? setSubCategory(event.target.value)
+      : isSubSubCategory
+      ? setSubSubCategory(event.target.value)
+      : setCategory(event.target.value);
   };
   if (!isSelectInput) {
     return (
       <FormControl
-        sx={{ marginTop: 2, marginBottom: 5, width: "20%" }}
+        sx={{ marginTop: 2, marginBottom: 5, marginRight: 2, width: "20%" }}
         size={"small"}
       >
         <InputLabel
@@ -45,7 +58,11 @@ const FormControlAuth = ({
             },
           }}
         >
-          select category
+          {isSubCategory
+            ? subCategory
+            : isSubSubCategory
+            ? subSubCategory
+            : category}
         </InputLabel>
         <Select
           sx={{
@@ -70,12 +87,16 @@ const FormControlAuth = ({
           label="select category"
           onChange={handleChange}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
+          {options.map((item, index) => {
+            return (
+              <MenuItem key={item} value={item}>
+                {item}
+              </MenuItem>
+            );
+          })}
+          {/* <MenuItem value={10}>Ten</MenuItem>
           <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem> */}
         </Select>
       </FormControl>
     );

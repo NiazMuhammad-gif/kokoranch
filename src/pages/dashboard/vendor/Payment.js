@@ -5,12 +5,17 @@ import { ReactComponent as PlusIcon } from "../../../assets/images/icons/icons8-
 
 import { useNavigate, useLocation } from "react-router-dom";
 import { TiTick } from "react-icons/ti";
+import { FaExclamation } from "react-icons/fa";
 import Images from "../../../constants/images";
 import NavBar from "./NavBar";
+import Popup from "../../../components/popUp/popUp";
 
 function Payment({ sidebar, setSidebar }) {
   let navigate = useNavigate();
-
+  let location = useLocation();
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [successfulPopup, setSuccessfulPopup] = useState(false);
+  const [successfulServicePopup, setSuccessfulServicePopup] = useState(false);
   const [data, setData] = useState({
     location:
       "Your post will appear on featured post section for the number of weeks you will select below",
@@ -21,6 +26,89 @@ function Payment({ sidebar, setSidebar }) {
   });
   return (
     <>
+      <Popup open={popupOpen} setOpen={setPopupOpen}>
+        <div className="soi-update-status">
+          <div className="successful-popup">
+            <div className="sp-icon">
+              <FaExclamation size={30} fill="black" />
+            </div>
+            <h3>
+              Are You Sure You
+              <br />
+              Want To Pay?
+            </h3>
+          </div>
+          <div className="soi-popup-btns d-flex">
+            <button
+              className="btn btn-solid btn-solid-cancel btn-outline-primary soi-popup-btn"
+              onClick={() => {
+                setPopupOpen(false);
+              }}
+            >
+              Cancel
+            </button>
+            <button
+              className="btn btn-solid btn-solid-primary  soi-popup-btn"
+              onClick={() => {
+                if (location?.state?.service) {
+                  setSuccessfulServicePopup(true);
+                } else {
+                  setSuccessfulPopup(true);
+                }
+                setPopupOpen(false);
+              }}
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </Popup>
+      <Popup open={successfulPopup} setOpen={setSuccessfulPopup}>
+        <div className="successful-popup">
+          <div className="sp-icon">
+            <TiTick size={30} fill="black" />
+          </div>
+
+          <h3>
+            Payment Successful
+            <br />
+            Your Product Is Featured For 1 Week.
+          </h3>
+
+          <button
+            className="btn btn-solid btn-solid-primary soi-success-btn"
+            onClick={() => {
+              setSuccessfulPopup(false);
+              navigate("/my-products");
+            }}
+          >
+            Close
+          </button>
+        </div>
+      </Popup>
+      <Popup open={successfulServicePopup} setOpen={setSuccessfulServicePopup}>
+        <div className="successful-popup">
+          <div className="sp-icon">
+            <TiTick size={30} fill="black" />
+          </div>
+
+          <h3>
+            Payment Successful Your Featured
+            <br />
+            Service Duration Is Extended Till 05-11-2022.
+          </h3>
+
+          <button
+            className="btn btn-solid btn-solid-primary soi-success-btn"
+            onClick={() => {
+              setSuccessfulPopup(false);
+              navigate("/my-products");
+            }}
+          >
+            Close
+          </button>
+        </div>
+      </Popup>
       <NavBar
         setSidebar={setSidebar}
         sidebar={sidebar}
@@ -290,7 +378,7 @@ function Payment({ sidebar, setSidebar }) {
         </div>
         <button
           onClick={() => {
-            navigate("/featured-payment");
+            setPopupOpen(true);
           }}
           className="btn btn-solid btn-solid-primary table-btn"
           style={{

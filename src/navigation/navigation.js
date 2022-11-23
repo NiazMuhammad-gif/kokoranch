@@ -64,12 +64,16 @@ const VendorProductShippingDetailEdit = React.lazy(() =>
 const FeaturedProductsAndServices = React.lazy(() =>
   import("../pages/dashboard/vendor/Featured")
 );
+const ViewFeaturedProductsAndServices = React.lazy(() =>
+  import("../pages/dashboard/vendor/ViewFeaturedDetails")
+);
 const EditFeaturedProductsAndService = React.lazy(() =>
   import("../pages/dashboard/vendor/EditFeatured")
 );
 const PaymentFeaturedComponent = React.lazy(() =>
   import("../pages/dashboard/vendor/Payment")
 );
+const VendorInbox = React.lazy(() => import("../pages/dashboard/vendor/inbox"));
 
 const Home = React.lazy(() => import("../pages/screens/home"));
 export default function Navigation() {
@@ -241,6 +245,16 @@ export default function Navigation() {
         }
       />
       <Route
+        path="/make-it-featured/view-featured-details"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <VendorSideBar>
+              <ViewFeaturedProductsAndServices />
+            </VendorSideBar>
+          </Suspense>
+        }
+      />
+      <Route
         path="/make-it-featured/payment"
         element={
           <Suspense fallback={<FullScreenLoader />}>
@@ -297,6 +311,16 @@ export default function Navigation() {
           <Suspense fallback={<FullScreenLoader />}>
             <VendorSideBar>
               <ServiceOrderIndividual />
+            </VendorSideBar>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/vendor-inbox"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <VendorSideBar>
+              <VendorInbox />
             </VendorSideBar>
           </Suspense>
         }

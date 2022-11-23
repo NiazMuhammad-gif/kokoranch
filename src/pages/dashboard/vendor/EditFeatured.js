@@ -8,7 +8,7 @@ import { TiTick } from "react-icons/ti";
 
 function EditFeatured({ sidebar, setSidebar }) {
   let navigate = useNavigate();
-
+  let location = useLocation();
   const [checkbox, setCheckBox] = useState({
     week1: false,
     week2: false,
@@ -209,14 +209,16 @@ function EditFeatured({ sidebar, setSidebar }) {
 
         <button
           onClick={() => {
-            navigate("/make-it-featured/payment");
+            navigate("/make-it-featured/payment", {
+              state: { service: location?.state?.service },
+            });
           }}
           className="btn btn-solid btn-solid-primary table-btn"
           style={{
             marginRight: "20px",
             paddingLeft: "20px",
             paddingRight: "20PX",
-            width: "120px",
+            width: "150px",
           }}
         >
           <div

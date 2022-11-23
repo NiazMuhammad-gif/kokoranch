@@ -80,6 +80,9 @@
   }
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
 .filter-prop {
   background-color: #14a384;
   color: white;
@@ -89,7 +92,35 @@
   position: absolute;
   right: 3%;
   z-index: 2;
-  top: 21%;
+  top: 10%;
+  p {
+    margin-bottom: 1rem;
+  }
+}
+.filter-prop1 {
+  background-color: #14a384;
+  color: white;
+  width: 15rem;
+  padding: 1.5rem;
+  border-radius: 10px;
+  position: absolute;
+  right: 3%;
+  z-index: 2;
+  top: 19%;
+  p {
+    margin-bottom: 1rem;
+  }
+}
+.filter-prop2 {
+  background-color: #14a384;
+  color: white;
+  width: 15rem;
+  padding: 1.5rem;
+  border-radius: 10px;
+  position: absolute;
+  right: 3%;
+  z-index: 2;
+  top: 17%;
   p {
     margin-bottom: 1rem;
   }

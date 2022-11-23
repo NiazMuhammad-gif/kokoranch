@@ -193,7 +193,7 @@ function EditServiceDetails({ sidebar, setSidebar }) {
               onClick={() => {
                 setSuccessfulPopup(true);
               }}
-              className="btn btn-solid btn-solid-primary table-btn"
+              className="btn btn-solid btn-solid-primary-rounded table-btn"
               style={{
                 marginRight: "20px",
                 paddingLeft: "20px",
@@ -216,7 +216,7 @@ function EditServiceDetails({ sidebar, setSidebar }) {
               onClick={() => {
                 navigate(-1);
               }}
-              className="btn btn-solid btn-solid-primary table-btn"
+              className="btn btn-solid btn-outline-primary-rounded table-btn"
               style={{
                 marginRight: "20px",
                 paddingLeft: "20px",

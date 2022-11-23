@@ -47,6 +47,54 @@ function VendorServiceOrders({ setSidebar, sidebar }) {
       date: "24-01-22",
       userId: "001",
       amountPaid: "$21.00",
+      status: "Pending",
+      action: "Action",
+    },
+    {
+      orderNo: "01",
+      date: "24-01-22",
+      userId: "001",
+      amountPaid: "$21.00",
+      status: "Pending",
+      action: "Action",
+    },
+    {
+      orderNo: "01",
+      date: "24-01-22",
+      userId: "001",
+      amountPaid: "$21.00",
+      status: "Pending",
+      action: "Action",
+    },
+    {
+      orderNo: "01",
+      date: "24-01-22",
+      userId: "001",
+      amountPaid: "$21.00",
+      status: "Pending",
+      action: "Action",
+    },
+    {
+      orderNo: "01",
+      date: "24-01-22",
+      userId: "001",
+      amountPaid: "$21.00",
+      status: "Pending",
+      action: "Action",
+    },
+    {
+      orderNo: "01",
+      date: "24-01-22",
+      userId: "001",
+      amountPaid: "$21.00",
+      status: "Pending",
+      action: "Action",
+    },
+    {
+      orderNo: "01",
+      date: "24-01-22",
+      userId: "001",
+      amountPaid: "$21.00",
       status: "Completed",
       action: "Action",
     },
@@ -110,6 +158,7 @@ function VendorServiceOrders({ setSidebar, sidebar }) {
             data={filterCard}
             activeCard={activeCard}
             setActiveCard={setActiveCard}
+            featured1={true}
           />
         </div>
         <div
@@ -138,19 +187,19 @@ function VendorServiceOrders({ setSidebar, sidebar }) {
                   <SearchBar />
                 </div>
               </div>
-              <div
+              {/* <div
                 style={{
                   width: "95%",
                   margin: "20px",
                 }}
-              >
-                <TableComponent
-                  tHeadData={tableHeadData}
-                  tRowData={tableRowData}
-                  edit={"serviceOrder"}
-                  activeCard={"total"}
-                />
-              </div>
+              > */}
+              <TableComponent
+                tHeadData={tableHeadData}
+                tRowData={tableRowData}
+                edit={"serviceOrder"}
+                activeCard={"total"}
+              />
+              {/* </div> */}
             </div>
           </div>
         </div>

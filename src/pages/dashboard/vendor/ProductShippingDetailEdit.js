@@ -198,7 +198,7 @@ function ProductShippingDetailEdit({ sidebar, setSidebar }) {
               onClick={() => {
                 navigate(-1);
               }}
-              className="btn btn-solid btn-solid-primary table-btn"
+              className="btn btn-solid btn-outline-primary table-btn"
               style={{
                 marginRight: "20px",
                 paddingLeft: "20px",

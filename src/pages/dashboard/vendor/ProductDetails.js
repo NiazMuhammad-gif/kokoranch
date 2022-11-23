@@ -202,7 +202,7 @@ const ProductDetails = ({ setSidebar, sidebar }) => {
               </button>
               <button
                 className="btn btn-solid btn-solid-process soi-btn "
-                onClick={() => setPopupOpen(true)}
+                onClick={() => navigate("/make-it-featured")}
                 style={{ width: "fit-content" }}
               >
                 Make it Featured

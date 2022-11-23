@@ -135,14 +135,14 @@ export default function VendorSideBar({ children }) {
             </NavLink>
           </h4>
           <h4 className="fs-5">
-            {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
-            <div className="vendor-inbox-link">
-              {/* <img src={inbox} style={{ width: "8%", marginRight: "5px" }} /> */}
-              <Inbox width={15} />
-              &nbsp; Inbox
-              <span className="count">3</span>
-            </div>
-            {/* </NavLink> */}
+            <NavLink to="/vendor-inbox" className="vendor-link">
+              <div className="vendor-inbox-link">
+                {/* <img src={inbox} style={{ width: "8%", marginRight: "5px" }} /> */}
+                <Inbox width={15} />
+                &nbsp; Inbox
+                <span className="count">3</span>
+              </div>
+            </NavLink>
           </h4>
           <h4 className="fs-5">
             {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
