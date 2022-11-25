@@ -20,7 +20,7 @@ export default function Messages(props) {
   };
   return (
     <>
-      <main>
+      <main style={{ height: "78vh" }}>
         <header>
           <nav className="navbar ">
             <div className="navbar_left">

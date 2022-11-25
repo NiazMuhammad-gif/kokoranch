@@ -10,7 +10,7 @@ import { MdCancel } from "react-icons/md";
 import { ReactComponent as CameraInputIcon } from "../../../assets/images/icons/camera-input-icon.svg";
 import { Grid } from "@mui/material";
 import { toast } from "react-toastify";
-function EditProductDetails({ sidebar, setSidebar }) {
+function AddProductDetails({ sidebar, setSidebar }) {
   let navigate = useNavigate();
   const location = useLocation();
   const [popupOpen, setPopupOpen] = useState(false);
@@ -74,13 +74,7 @@ function EditProductDetails({ sidebar, setSidebar }) {
           </button>
         </div>
       </Popup>
-      <NavBar
-        setSidebar={setSidebar}
-        sidebar={sidebar}
-        title={
-          location?.state?.addProduct ? "Add Product" : "Edit Product Details"
-        }
-      />
+      <NavBar setSidebar={setSidebar} sidebar={sidebar} title={"Add Product"} />
       <Paper
         sx={{
           backgroundColor: "#1e1e1e",
@@ -505,4 +499,4 @@ function EditProductDetails({ sidebar, setSidebar }) {
   );
 }
 
-export default EditProductDetails;
+export default AddProductDetails;

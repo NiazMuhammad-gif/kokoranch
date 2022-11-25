@@ -176,7 +176,7 @@ const ServiceDetails = ({ setSidebar, sidebar }) => {
           </h3>
         </div>
       </div>
-      <div className="bg-black-pad my-5 " style={{ height: "85vh" }}>
+      <div className="bg-black-pad my-5 " style={{ height: "82vh" }}>
         <div className="soi-top ">
           <div className="row">
             <div className="col-4 col-sm-12 col-md-4 col-lg-4 soi-orderNo">
@@ -186,7 +186,7 @@ const ServiceDetails = ({ setSidebar, sidebar }) => {
             <div className="col-6 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-end align-items-center">
               <button
                 onClick={() => {
-                  navigate("/agricultural-services/details/edit");
+                  navigate("/vendor-agricultural-services/details/edit");
                 }}
                 className="btn btn-solid btn-solid-primary soi-btn mx-2"
                 style={{ width: "fit-content" }}
@@ -203,7 +203,7 @@ const ServiceDetails = ({ setSidebar, sidebar }) => {
               <button
                 className="btn btn-solid btn-solid-process soi-btn "
                 onClick={() =>
-                  navigate("/make-it-featured", {
+                  navigate("/vendor-make-it-featured", {
                     state: { service: true },
                   })
                 }

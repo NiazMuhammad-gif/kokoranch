@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { ReactComponent as PlusIcon } from "../../../assets/images/icons/icons8-plus.svg";
 import NavBar from "./NavBar";
+import { TiTick } from "react-icons/ti";
+import { FaExclamation } from "react-icons/fa";
+import Popup from "../../../components/popUp/popUp";
 import { useNavigate, useLocation } from "react-router-dom";
 function ViewFeaturedDetail({ sidebar, setSidebar }) {
   let navigate = useNavigate();
@@ -14,8 +17,69 @@ function ViewFeaturedDetail({ sidebar, setSidebar }) {
     Return: "skjdhfkjsdhf",
     ShippingAndHandling: "sjdhfjksh",
   });
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [successfulPopup, setSuccessfulPopup] = useState(false);
   return (
     <>
+      <Popup open={popupOpen} setOpen={setPopupOpen}>
+        <div className="soi-update-status">
+          <div className="successful-popup">
+            <div className="sp-icon">
+              <FaExclamation size={30} fill="black" />
+            </div>
+            <h3>
+              Are You Sure You Want To Remove
+              <br />
+              This From Featured Products?
+            </h3>
+            <p style={{ color: "red" }}>
+              Note: Paid amount will not be refunded
+            </p>
+          </div>
+          <div className="soi-popup-btns d-flex">
+            <button
+              className="btn btn-solid btn-solid-cancel btn-outline-primary soi-popup-btn"
+              onClick={() => {
+                setPopupOpen(false);
+              }}
+            >
+              Cancel
+            </button>
+            <button
+              className="btn btn-solid btn-solid-primary  soi-popup-btn"
+              onClick={() => {
+                setPopupOpen(false);
+                setSuccessfulPopup(true);
+              }}
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </Popup>
+      <Popup open={successfulPopup} setOpen={setSuccessfulPopup}>
+        <div className="successful-popup">
+          <div className="sp-icon">
+            <TiTick size={30} fill="black" />
+          </div>
+
+          <h3>
+            Successfully Removed From
+            <br />
+            Featured Products
+          </h3>
+
+          <button
+            className="btn btn-solid btn-solid-primary soi-success-btn"
+            onClick={() => {
+              setSuccessfulPopup(false);
+              // navigate("/vendor-my-products");
+            }}
+          >
+            Continue
+          </button>
+        </div>
+      </Popup>
       <NavBar
         setSidebar={setSidebar}
         sidebar={sidebar}
@@ -68,7 +132,7 @@ function ViewFeaturedDetail({ sidebar, setSidebar }) {
               <div className="col-12 col-md-6 col-lg-6 col-sm-12 d-flex justify-content-end">
                 <button
                   onClick={() => {
-                    navigate("/my-products/details", {
+                    navigate("/vendor-my-products/details", {
                       state: { data: "row" },
                     });
                   }}
@@ -137,7 +201,7 @@ function ViewFeaturedDetail({ sidebar, setSidebar }) {
           <div className="col-12 col-md-3 col-lg-2 col-sm-6 mt-3 d-flex ">
             <button
               onClick={() => {
-                navigate("/vendor-productshippingdetails/edit");
+                setPopupOpen(true);
               }}
               className="btn btn-solid btn-outline-primary table-btn"
               style={{
@@ -149,7 +213,7 @@ function ViewFeaturedDetail({ sidebar, setSidebar }) {
             </button>
             <button
               onClick={() => {
-                navigate("/vendor-productshippingdetails/edit");
+                navigate("/vendor-make-it-featured");
               }}
               className="btn btn-solid btn-solid-primary table-btn"
               style={{

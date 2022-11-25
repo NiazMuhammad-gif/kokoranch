@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { FaSearch, FaPlus, FaAngleDown, FaFilter } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useState, useEffect } from "react";
+import { FaSearch, FaPlus, FaAngleDown, FaFilter } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import {
   GET_All_SELLER_TRADES,
   EDIT_TRADE_INFO_DETAIL_ACTION,
   DELETE_TRADE_ACTION,
-} from '../../../../redux/actions/trades'
+} from "../../../../redux/actions/trades";
 
-import moment from 'moment'
+import moment from "moment";
 
 export default function TradeList({
   setView,
@@ -19,47 +19,48 @@ export default function TradeList({
   setRecordForEdit,
   setNewRecord,
 }) {
-  const dispatch = useDispatch()
-  const { traderTrades, deleteTrade } = useSelector(
-    (state) => state.TradesReducers,
-  )
+  const dispatch = useDispatch();
+  const { deleteTrade } = useSelector((state) => state.TradesReducers);
+  const [traderTrades, setTraderTrades] = useState([
+    { _id: "1", inSearchOf: "sajgd", toExchangeWith: "kjhakjh" },
+  ]);
 
-  const [sortType, setsortType] = useState('Ascending')
+  const [sortType, setsortType] = useState("Ascending");
   const [dateSelectedFilter, setdateSelectedFilter] = useState({
-    fromDate: '',
-    toDate: '',
-  })
-  const userData = JSON.parse(localStorage.getItem('userData'))
+    fromDate: "",
+    toDate: "",
+  });
+  const userData = JSON.parse(localStorage.getItem("userData"));
 
   const truncate = (str, n) => {
-    return str?.length > n ? str.substr(0, n - 1) + '...' : str
-  }
+    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  };
 
   const handleSortProducts = (a, b) => {
-    if (sortType == 'Filter Date') {
+    if (sortType == "Filter Date") {
       return (
         new Date(dateSelectedFilter.fromDate) -
         new Date(dateSelectedFilter.toDate)
-      )
-    } else if (sortType == 'Newest First') {
-      return new Date(b.createdAt) - new Date(a.createdAt)
-    } else if (sortType == 'Oldest First') {
-      return new Date(a.createdAt) - new Date(b.createdAt)
+      );
+    } else if (sortType == "Newest First") {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    } else if (sortType == "Oldest First") {
+      return new Date(a.createdAt) - new Date(b.createdAt);
     }
-  }
-  useEffect(() => {
-    dispatch(
-      GET_All_SELLER_TRADES(userData?._id, localStorage.getItem('token')),
-    )
-  }, [deleteTrade])
+  };
+  // useEffect(() => {
+  //   dispatch(
+  //     GET_All_SELLER_TRADES(userData?._id, localStorage.getItem("token"))
+  //   );
+  // }, [deleteTrade]);
 
   return (
     <>
       <article className="trader-trades-main">
         <header>
           <h3>
-            Trade List{traderTrades ? '(' + traderTrades?.length + ')' : '0'}
-          </h3>{' '}
+            Trade List{traderTrades ? "(" + traderTrades?.length + ")" : "0"}
+          </h3>{" "}
           <div className="right">
             <div className="right_inner-left">
               <div className="table-search-wrappper">
@@ -142,8 +143,8 @@ export default function TradeList({
                   </div>
                   <button
                     onClick={() => {
-                      console.log(dateSelectedFilter)
-                      setsortType('Filter Date')
+                      console.log(dateSelectedFilter);
+                      setsortType("Filter Date");
                     }}
                     className="btn btn-solid btn-solid-primary mx-auto"
                   >
@@ -154,9 +155,9 @@ export default function TradeList({
               <button
                 className="btn btn-solid btn-solid-primary"
                 onClick={() => {
-                  setView('view')
-                  setEditAble(true)
-                  setNewRecord(true)
+                  setView("view");
+                  setEditAble(true);
+                  setNewRecord(true);
                 }}
               >
                 <FaPlus />
@@ -176,81 +177,82 @@ export default function TradeList({
                 <th className="li-product-price">Upload Date</th>
                 <th
                   className="li-product-subtotal"
-                  style={{ textAlign: 'left' }}
+                  style={{ textAlign: "left" }}
                 >
                   Action
                 </th>
               </tr>
             </thead>
             <tbody>
-              {traderTrades
-                ?.map((order, index) => {
-                  return (
-                    <tr key={index}>
-                      <td data-heading="Trade Code">
-                        {'0' + order._id.slice(0, 3)}
-                      </td>
-                      <td data-heading="In Search Of">
-                        {truncate(order.inSearchOf, 40)}
-                      </td>
-                      <td data-heading="Exchange With">
-                        {truncate(order.toExchangeWith, 40)}
-                      </td>
-                      <td data-heading="Upload Date">
-                        {' '}
-                        {moment(order.createdAt).format(
-                          'MMM DD YYYY h:mm A',
-                        )}{' '}
-                      </td>
-                      <td
-                        data-heading="Action"
-                        className="d-flex"
-                        style={{ textAlign: 'left' }}
-                      >
-                        <button
-                          className="btn btn-solid btn-solid-primary px-4 me-3 color-white"
-                          onClick={() => {
-                            dispatch(EDIT_TRADE_INFO_DETAIL_ACTION(order))
-                            setView('view')
-                            setRecordForEdit(null)
-                            setEditAble(false)
-                          }}
+              {traderTrades.length > 0 &&
+                traderTrades
+                  ?.map((order, index) => {
+                    return (
+                      <tr key={index}>
+                        <td data-heading="Trade Code">
+                          {"0" + order._id.slice(0, 3)}
+                        </td>
+                        <td data-heading="In Search Of">
+                          {truncate(order.inSearchOf, 40)}
+                        </td>
+                        <td data-heading="Exchange With">
+                          {truncate(order.toExchangeWith, 40)}
+                        </td>
+                        <td data-heading="Upload Date">
+                          {" "}
+                          {moment(order.createdAt).format(
+                            "MMM DD YYYY h:mm A"
+                          )}{" "}
+                        </td>
+                        <td
+                          data-heading="Action"
+                          className="d-flex"
+                          style={{ textAlign: "left" }}
                         >
-                          View
-                        </button>
-                        <button
-                          className="btn btn-solid btn-solid-warning px-4 me-3 color-white"
-                          onClick={() => {
-                            setView('view')
-                            dispatch(EDIT_TRADE_INFO_DETAIL_ACTION(order))
-                            setEditAble(true)
-                            setNewRecord(false)
-                          }}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          onClick={() => {
-                            dispatch(
-                              DELETE_TRADE_ACTION(
-                                order._id,
-                                localStorage.getItem('token'),
-                              ),
-                            )
-                          }}
-                          className="btn btn-solid btn-solid-danger px-4 color-white"
-                        >
-                          Delete
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                })
-                ?.sort((a, b) => handleSortProducts(a, b))}
+                          <button
+                            className="btn btn-solid btn-solid-primary px-4 me-3 color-white"
+                            onClick={() => {
+                              // dispatch(EDIT_TRADE_INFO_DETAIL_ACTION(order));
+                              setView("view");
+                              setRecordForEdit(null);
+                              setEditAble(false);
+                            }}
+                          >
+                            View
+                          </button>
+                          <button
+                            className="btn btn-solid btn-solid-warning px-4 me-3 color-white"
+                            onClick={() => {
+                              setView("view");
+                              // dispatch(EDIT_TRADE_INFO_DETAIL_ACTION(order));
+                              setEditAble(true);
+                              setNewRecord(false);
+                            }}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            onClick={() => {
+                              // dispatch(
+                              //   DELETE_TRADE_ACTION(
+                              //     order._id,
+                              //     localStorage.getItem("token")
+                              //   )
+                              // );
+                            }}
+                            className="btn btn-solid btn-solid-danger px-4 color-white"
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })
+                  ?.sort((a, b) => handleSortProducts(a, b))}
             </tbody>
           </table>
         </div>
       </article>
     </>
-  )
+  );
 }

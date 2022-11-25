@@ -166,9 +166,12 @@ const TableComponent = ({
                                 className="btn btn-solid btn-solid-primary table-btn"
                                 onClick={() => {
                                   if (edit == "services") {
-                                    navigate("/agricultural-services/details", {
-                                      state: { data: row },
-                                    });
+                                    navigate(
+                                      "/vendor-agricultural-services/details",
+                                      {
+                                        state: { data: row },
+                                      }
+                                    );
                                   } else if (edit == "serviceOrder") {
                                     navigate("/vendor-serviceorders/details", {
                                       state: { data: row },
@@ -178,13 +181,15 @@ const TableComponent = ({
                                       state: { data: row },
                                     });
                                   } else if (edit == "products") {
-                                    navigate("/my-products/details", {
+                                    navigate("/vendor-my-products/details", {
                                       state: { data: row },
                                     });
                                   } else if (edit == "featured") {
                                     navigate(
-                                      "/make-it-featured/view-featured-details"
+                                      "/vendor-make-it-featured/view-featured-details"
                                     );
+                                  } else if (edit == "ratings") {
+                                    setOpen(true);
                                   }
                                 }}
                               >
@@ -199,6 +204,16 @@ const TableComponent = ({
                                   style={{ marginLeft: "10px" }}
                                 >
                                   Delete
+                                </button>
+                              ) : edit == "ratings" ? (
+                                <button
+                                  // onClick={() => {
+                                  //   setOpen(true);
+                                  // }}
+                                  className="btn btn-solid btn-solid-secondary table-btn"
+                                  style={{ marginLeft: "10px" }}
+                                >
+                                  Page View
                                 </button>
                               ) : (
                                 edit == "products" && (

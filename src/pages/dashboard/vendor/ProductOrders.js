@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FaRegUser,
   FaTradeFederation,
@@ -29,41 +29,41 @@ function VendorProductOrders({ setSidebar, sidebar }) {
   const [tableRowData, setTableRowData] = useState([
     {
       orderNo: "01",
-      date: "24-01-22",
+      date: "2022-01-10",
       userId: "001",
-      amountPaid: "$21.00",
+      amountPaid: "21.00",
       status: "Pending",
       action: "Action",
     },
     {
       orderNo: "01",
-      date: "24-01-22",
+      date: "2022-01-11",
       userId: "001",
-      amountPaid: "$21.00",
+      amountPaid: "31.00",
       status: "Pending",
       action: "Action",
     },
     {
       orderNo: "01",
-      date: "24-01-22",
+      date: "2022-01-12",
       userId: "001",
-      amountPaid: "$21.00",
+      amountPaid: "41.00",
       status: "Completed",
       action: "Action",
     },
     {
       orderNo: "01",
-      date: "24-01-22",
+      date: "2022-01-13",
       userId: "001",
-      amountPaid: "$21.00",
+      amountPaid: "51.00",
       status: "Pending",
       action: "Action",
     },
     {
       orderNo: "01",
-      date: "24-01-22",
+      date: "2022-01-14",
       userId: "001",
-      amountPaid: "$21.00",
+      amountPaid: "61.00",
       status: "Booked",
       action: "Action",
     },
@@ -97,6 +97,50 @@ function VendorProductOrders({ setSidebar, sidebar }) {
   ]);
 
   const [activeCard, setActiveCard] = useState(filterCard[0].topText);
+
+  const [rowData, setRowData] = useState(tableRowData);
+  const [sortData, setSortData] = useState("");
+
+  useEffect(() => {
+    let temp = [];
+    if (activeCard == "Total Orders") {
+      temp = tableRowData;
+      console.log("all");
+    } else if (activeCard == "Pending Orders") {
+      temp = tableRowData.filter((item) => item.status == "Pending");
+    } else if (activeCard == "Orders On The Way") {
+      temp = tableRowData.filter((item) => item.status == "Booked");
+    } else if (activeCard == "Delevered Orders") {
+      temp = tableRowData.filter((item) => item.status == "Completed");
+    } else if (activeCard == "Cancelled Orders") {
+      temp = tableRowData.filter((item) => item.status == "Cancelled");
+    }
+    setRowData(temp);
+  }, [activeCard]);
+  useEffect(() => {
+    if (sortData) {
+      let temp = [];
+      if (sortData == "asc") {
+        temp = rowData.sort((a, b) => {
+          return Number(new Date(a.date)) - Number(new Date(b.date));
+        });
+      } else if (sortData == "dec") {
+        temp = rowData.sort((a, b) => {
+          return Number(new Date(b.date)) - Number(new Date(a.date));
+        });
+      } else if (sortData == "low") {
+        temp = rowData.sort((a, b) => {
+          return Number(a.amountPaid) - Number(b.amountPaid);
+        });
+      } else if (sortData == "high") {
+        temp = rowData.sort((a, b) => {
+          return Number(b.amountPaid) - Number(a.amountPaid);
+        });
+      }
+
+      setRowData(temp);
+    }
+  }, [sortData]);
   return (
     <>
       <NavBar
@@ -111,6 +155,8 @@ function VendorProductOrders({ setSidebar, sidebar }) {
             data={filterCard}
             activeCard={activeCard}
             setActiveCard={setActiveCard}
+            sortData={sortData}
+            setSortData={setSortData}
             featured1={true}
           />
         </div>
@@ -143,7 +189,7 @@ function VendorProductOrders({ setSidebar, sidebar }) {
               </div>
               <TableComponent
                 tHeadData={tableHeadData}
-                tRowData={tableRowData}
+                tRowData={rowData}
                 edit={"productOrderDetails"}
                 activeCard={"total"}
               />

@@ -3,9 +3,10 @@ import NavBar from "./NavBar";
 import InfoCards from "./Components/InfoCards";
 import TableComponent from "./Components/Table";
 import SearchBar from "./Components/SearchBar";
+import CustomPopup from "../../../components/customPopUp/CustomPopUp";
 import { ReactComponent as FilterIcon } from "../../../assets/images/icons/filter-icon.svg";
 import FilterProp from "./Components/FilterProp";
-function Featured({ setSidebar, sidebar }) {
+function RatingReview({ setSidebar, sidebar }) {
   const [showFilterProp, setShowFilterProp] = useState(false);
   const [tableHeadData, seTableHeadData] = useState([
     { id: "orderNo", label: "Order No" },
@@ -61,6 +62,7 @@ function Featured({ setSidebar, sidebar }) {
 
   const [rowData, setRowData] = useState(tableRowData);
   const [sortData, setSortData] = useState("");
+  const [viewRatings, setViewRatings] = useState(false);
   const [button, setButton] = useState({
     all: true,
     product: false,
@@ -95,10 +97,11 @@ function Featured({ setSidebar, sidebar }) {
   useEffect(() => {}, [showFilterProp]);
   return (
     <>
+      <CustomPopup open={viewRatings} setOpen={setViewRatings} rating={true} />
       <NavBar
         setSidebar={setSidebar}
         sidebar={sidebar}
-        title="Featured Products & Services"
+        title="Ratings & Reviews"
       />
 
       <article className="vendor-profile-main" style={{ position: "relative" }}>
@@ -118,7 +121,7 @@ function Featured({ setSidebar, sidebar }) {
                 width: "95%",
               }}
             >
-              <h3 style={{ marginLeft: "20px" }}>Featured List</h3>
+              <h3 style={{ marginLeft: "20px" }}>Ratings & Reviews</h3>
               <div className="featured-button-container">
                 <button
                   onClick={() => {
@@ -183,8 +186,9 @@ function Featured({ setSidebar, sidebar }) {
             <TableComponent
               tHeadData={tableHeadData}
               tRowData={rowData}
-              edit={"featured"}
+              edit={"ratings"}
               activeCard={"total"}
+              setOpen={setViewRatings}
             />
           </div>
         </div>
@@ -200,4 +204,4 @@ function Featured({ setSidebar, sidebar }) {
   );
 }
 
-export default Featured;
+export default RatingReview;

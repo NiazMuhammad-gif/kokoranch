@@ -79,7 +79,7 @@ function Payment({ sidebar, setSidebar }) {
             className="btn btn-solid btn-solid-primary soi-success-btn"
             onClick={() => {
               setSuccessfulPopup(false);
-              navigate("/my-products");
+              navigate("/vendor-my-products");
             }}
           >
             Close
@@ -102,7 +102,7 @@ function Payment({ sidebar, setSidebar }) {
             className="btn btn-solid btn-solid-primary soi-success-btn"
             onClick={() => {
               setSuccessfulPopup(false);
-              navigate("/my-products");
+              navigate("/vendor-my-products");
             }}
           >
             Close

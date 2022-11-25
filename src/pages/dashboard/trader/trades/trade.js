@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { FaAngleLeft, FaCamera } from 'react-icons/fa'
-import Images from '../../../../constants/images'
-import { useSelector, useDispatch } from 'react-redux'
+import React, { useEffect, useState } from "react";
+import { FaAngleLeft, FaCamera } from "react-icons/fa";
+import Images from "../../../../constants/images";
+import { useSelector, useDispatch } from "react-redux";
 import {
   UPDATE_TRADE_TRADE_ACTION,
   CREATE_TRADE_ACTION,
   DELETE_TRADE_ACTION,
-} from '../../../../redux/actions/trades'
+} from "../../../../redux/actions/trades";
 export default function Trade({
   editAble,
   setEditAble,
@@ -16,62 +16,62 @@ export default function Trade({
   setRecordForEdit,
   newRecord,
 }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const { editTradeInfo, updateTrade, deleteTrade, newTrade } = useSelector(
-    (state) => state.TradesReducers,
-  )
-  const { _id } = JSON.parse(localStorage.getItem('userData'))
+    (state) => state.TradesReducers
+  );
+  // const { _id } = JSON.parse(localStorage.getItem('userData'))
   const [trade, setTrade] = useState({
-    inSearchOf: '',
-    toExchangeWith: '',
-    details: '',
+    inSearchOf: "",
+    toExchangeWith: "",
+    details: "",
     images: [],
-    traderId: '',
-    tradeType: '',
-  })
+    traderId: "",
+    tradeType: "",
+  });
 
   const handleChange = (e) => {
     setTrade({
       ...trade,
       [e.target.name]: e.target.value,
-    })
-  }
-  const [selectedImages, setselectedImages] = useState([])
+    });
+  };
+  const [selectedImages, setselectedImages] = useState([]);
 
   const handleEditTradeInfo = (e) => {
     if (editAble && newRecord == false) {
-      dispatch(
-        UPDATE_TRADE_TRADE_ACTION(
-          editTradeInfo._id,
-          localStorage.getItem('token'),
-          trade,
-        ),
-      )
+      // dispatch(
+      //   UPDATE_TRADE_TRADE_ACTION(
+      //     editTradeInfo._id,
+      //     localStorage.getItem("token"),
+      //     trade
+      //   )
+      // );
     } else if (newRecord) {
-      dispatch(CREATE_TRADE_ACTION(trade, localStorage.getItem('token')))
+      // dispatch(CREATE_TRADE_ACTION(trade, localStorage.getItem("token")));
     }
-  }
-  useEffect(() => {
-    if (recordForEdit && setEditAble) {
-      setTrade(recordForEdit)
-    }
-  }, [])
-  useEffect(() => {
-    if (editTradeInfo && newRecord == false) {
-      setTrade({ ...editTradeInfo })
-      setselectedImages(editTradeInfo.images)
-    } else if (newRecord) {
-      setTrade({ ...trade, traderId: _id })
-    }
-  }, [editTradeInfo])
+  };
+  // useEffect(() => {
+  //   if (recordForEdit && setEditAble) {
+  //     setTrade(recordForEdit);
+  //   }
+  // }, []);
+  // useEffect(() => {
+  //   if (editTradeInfo && newRecord == false) {
+  //     setTrade({ ...editTradeInfo });
+  //     setselectedImages(editTradeInfo.images);
+  //   } else if (newRecord) {
+  //     // setTrade({ ...trade, traderId: _id });
+  //   }
+  // }, [editTradeInfo]);
 
-  useEffect(() => {
-    if (updateTrade || newTrade || deleteTrade) {
-      setTimeout(() => {
-        window.location.reload(false)
-      }, 3000)
-    }
-  }, [updateTrade, newTrade, deleteTrade])
+  // useEffect(() => {
+  //   if (updateTrade || newTrade || deleteTrade) {
+  //     setTimeout(() => {
+  //       window.location.reload(false);
+  //     }, 3000);
+  //   }
+  // }, [updateTrade, newTrade, deleteTrade]);
 
   // eslint-disable-line react-hooks/exhaustive-deps
   return (
@@ -85,9 +85,9 @@ export default function Trade({
             <div
               className="back-button"
               onClick={() => {
-                setEditAble(false)
-                setView(null)
-                setRecordForEdit(null)
+                setEditAble(false);
+                setView(null);
+                setRecordForEdit(null);
               }}
             >
               <FaAngleLeft />
@@ -186,19 +186,19 @@ export default function Trade({
                       onChange={(e) => {
                         // console.log(e.target.files)
                         // return
-                        let reader = new FileReader()
+                        let reader = new FileReader();
                         reader.onload = (e) => {
                           setselectedImages([
                             ...selectedImages,
                             e.target.result,
-                          ])
-                        }
-                        reader.readAsDataURL(e.target.files[0])
+                          ]);
+                        };
+                        reader.readAsDataURL(e.target.files[0]);
 
                         setTrade({
                           ...trade,
                           images: [...trade?.images, e.target.files[0]],
-                        })
+                        });
                       }}
                     />
                     <FaCamera />
@@ -209,10 +209,10 @@ export default function Trade({
                       <img
                         key={index}
                         src={c}
-                        style={{ width: '10rem', height: '10rem' }}
+                        style={{ width: "10rem", height: "10rem" }}
                         alt="product"
                       ></img>
-                    )
+                    );
                   })}
                 </div>
               ) : newRecord == true && editAble == false ? (
@@ -222,10 +222,10 @@ export default function Trade({
                       <img
                         key={index}
                         src={c}
-                        style={{ width: '10rem', height: '10rem' }}
+                        style={{ width: "10rem", height: "10rem" }}
                         alt="product"
                       ></img>
-                    )
+                    );
                   })}
                 </div>
               ) : (
@@ -235,10 +235,10 @@ export default function Trade({
                       <img
                         key={index}
                         src={c}
-                        style={{ width: '10rem', height: '10rem' }}
+                        style={{ width: "10rem", height: "10rem" }}
                         alt="product"
                       ></img>
-                    )
+                    );
                   })}
                 </div>
               )}
@@ -253,14 +253,14 @@ export default function Trade({
                 onClick={() => handleEditTradeInfo()}
                 className="btn btn-solid btn-solid-primary"
               >
-                {editAble && !newRecord ? 'Save' : 'Upload'}
+                {editAble && !newRecord ? "Save" : "Upload"}
               </button>
               <button
                 className="btn btn-outline-primary"
                 onClick={() => {
-                  setView(false)
-                  setEditAble(false)
-                  setRecordForEdit(null)
+                  setView(false);
+                  setEditAble(false);
+                  setRecordForEdit(null);
                 }}
               >
                 Cancel
@@ -271,8 +271,8 @@ export default function Trade({
               <button
                 className="btn btn-solid btn-solid-primary"
                 onClick={() => {
-                  setEditAble(true)
-                  setRecordForEdit(singleTrade)
+                  setEditAble(true);
+                  setRecordForEdit(singleTrade);
                 }}
               >
                 Edit
@@ -281,10 +281,10 @@ export default function Trade({
                 onClick={() => {
                   dispatch(
                     DELETE_TRADE_ACTION(
-                      editTradeInfo?._id,
-                      localStorage.getItem('token'),
-                    ),
-                  )
+                      // editTradeInfo?._id,
+                      localStorage.getItem("token")
+                    )
+                  );
                 }}
                 className="btn btn-outline-primary"
               >
@@ -295,5 +295,5 @@ export default function Trade({
         </div>
       </div>
     </>
-  )
+  );
 }

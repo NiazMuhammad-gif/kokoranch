@@ -1,43 +1,43 @@
-import React, { useState, useEffect } from 'react'
-import moment from 'moment'
-import { useSelector, useDispatch } from 'react-redux'
-import { GET_TRADE } from '../../../../redux/actions/trades'
+import React, { useState, useEffect } from "react";
+import moment from "moment";
+import { useSelector, useDispatch } from "react-redux";
+import { GET_TRADE } from "../../../../redux/actions/trades";
 function TradeRequestItem({ props, setView }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   // const { trade } = useSelector((state) => state.TradesReducers)
 
-  const [totalUnreadComments, settotalUnreadComments] = useState(0)
-  const [lastCommented, setlastCommented] = useState('')
+  const [totalUnreadComments, settotalUnreadComments] = useState(0);
+  const [lastCommented, setlastCommented] = useState("");
   const caculateUnreadComments = (comments) => {
-    let totalUnreadComments = 0
+    let totalUnreadComments = 0;
 
     for (let comment of comments) {
       if (comment.isViewedTrader === false) {
-        totalUnreadComments++
+        totalUnreadComments++;
       }
     }
 
-    settotalUnreadComments(totalUnreadComments)
-  }
+    settotalUnreadComments(totalUnreadComments);
+  };
   const getLastCommentDate = (comments) => {
     if (comments.length == 0) {
-      setlastCommented('None')
+      setlastCommented("None");
     } else {
-      const lastCommentItem = comments[comments.length - 1]
+      const lastCommentItem = comments[comments.length - 1];
 
-      setlastCommented(moment(lastCommentItem).format('MMM DD YYYY h:mm A'))
+      setlastCommented(moment(lastCommentItem).format("MMM DD YYYY h:mm A"));
     }
-  }
+  };
   const truncate = (str, n) => {
-    return str?.length > n ? str.substr(0, n - 1) + '...' : str
-  }
-  useEffect(() => {
-    if (props) {
-      caculateUnreadComments(props.tradeRequests)
-      getLastCommentDate(props.tradeRequests)
-    }
-  }, [props])
+    return str?.length > n ? str.substr(0, n - 1) + "..." : str;
+  };
+  // useEffect(() => {
+  //   if (props) {
+  //     caculateUnreadComments(props.tradeRequests)
+  //     getLastCommentDate(props.tradeRequests)
+  //   }
+  // }, [props])
 
   return (
     <tr key={props._id}>
@@ -48,24 +48,24 @@ function TradeRequestItem({ props, setView }) {
         {<span className="title-color">{totalUnreadComments}</span>}
         &nbsp;Comments
       </td>
-      <td data-heading="Upload Date">{lastCommented ? lastCommented : ''}</td>
+      <td data-heading="Upload Date">{lastCommented ? lastCommented : ""}</td>
       <td
         data-heading="Action"
         className="d-flex"
-        style={{ textAlign: 'left' }}
+        style={{ textAlign: "left" }}
       >
         <button
           className="btn btn-solid btn-solid-primary px-4 color-white"
           onClick={() => {
-            setView('single-trader-request')
-            dispatch(GET_TRADE(props._id))
+            setView("single-trader-request");
+            dispatch(GET_TRADE(props._id));
           }}
         >
           View
         </button>
       </td>
     </tr>
-  )
+  );
 }
 
-export default TradeRequestItem
+export default TradeRequestItem;

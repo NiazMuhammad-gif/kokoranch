@@ -209,7 +209,7 @@ function EditFeatured({ sidebar, setSidebar }) {
 
         <button
           onClick={() => {
-            navigate("/make-it-featured/payment", {
+            navigate("/vendor-make-it-featured/payment", {
               state: { service: location?.state?.service },
             });
           }}

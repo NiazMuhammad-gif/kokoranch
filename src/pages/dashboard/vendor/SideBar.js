@@ -75,7 +75,7 @@ export default function VendorSideBar({ children }) {
             </div>
           </div>
           <h4 className="fs-5">
-            <NavLink to="/" className="vendor-link" end>
+            <NavLink to="/vendor-profile" className="vendor-link" end>
               <div className="vendor-inbox-link">
                 <FaRegUser />
                 &nbsp; My Profile
@@ -83,7 +83,7 @@ export default function VendorSideBar({ children }) {
             </NavLink>
           </h4>
           <h4 className="fs-5">
-            <NavLink to="/my-products" className="vendor-link">
+            <NavLink to="/vendor-my-products" className="vendor-link">
               <div className="vendor-inbox-link">
                 <WineBottle width={15} />
                 &nbsp; My Products
@@ -91,7 +91,7 @@ export default function VendorSideBar({ children }) {
             </NavLink>
           </h4>
           <h4 className="fs-5">
-            <NavLink to="/agricultural-services" className="vendor-link">
+            <NavLink to="/vendor-agricultural-services" className="vendor-link">
               <div className="vendor-inbox-link">
                 <AgriService width={15} />
                 &nbsp; My Agricultural Services
@@ -111,7 +111,10 @@ export default function VendorSideBar({ children }) {
             </NavLink>
           </h4>
           <h4 className="fs-5">
-            <NavLink to="/featured-products-services" className="vendor-link">
+            <NavLink
+              to="/vendor-featured-products-services"
+              className="vendor-link"
+            >
               <div className="vendor-inbox-link">
                 <Medal width={15} />
                 &nbsp; Featured Products And Services
@@ -145,42 +148,29 @@ export default function VendorSideBar({ children }) {
             </NavLink>
           </h4>
           <h4 className="fs-5">
-            {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
-            <div className="vendor-inbox-link">
-              {/* <img src={ratings} style={{ width: "8%", marginRight: "5px" }} /> */}
-              <Ratings width={15} />
-              &nbsp; Ratings & Reviews
-              <span className="count">2</span>
-            </div>
-            {/* </NavLink> */}
+            <NavLink to="/vendor-rating-and-review" className="vendor-link">
+              <div className="vendor-inbox-link">
+                <Ratings width={15} />
+                &nbsp; Ratings & Reviews
+                <span className="count">2</span>
+              </div>
+            </NavLink>
           </h4>
           <h4 className="fs-5">
-            {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
-            <div className="vendor-inbox-link">
-              {/* <img
-                src={marijuana}
-                style={{ width: "8%", marginRight: "5px" }}
-              /> */}
-              <Marijuana width={15} />
-              &nbsp; Medical Marijuana
-            </div>
-            {/* </NavLink> */}
+            <NavLink to="/vendor-medical-merijuana" className="vendor-link">
+              <div className="vendor-inbox-link">
+                <Marijuana width={15} />
+                &nbsp; Medical Marijuana
+              </div>
+            </NavLink>
           </h4>
           <h4 className="fs-5">
-            {/* <NavLink to="/vendor-profile" className="vendor-link"> */}
-            <div className="vendor-inbox-link">
-              {/* <img
-                src={settings}
-                style={{
-                  width: "8%",
-                  marginRight: "5px",
-                  fill: "red",
-                }}
-              /> */}
-              <Settings width={15} />
-              &nbsp; Settings
-            </div>
-            {/* </NavLink> */}
+            <NavLink to="/vendor-settings" className="vendor-link">
+              <div className="vendor-inbox-link">
+                <Settings width={15} />
+                &nbsp; Settings
+              </div>
+            </NavLink>
           </h4>
 
           {/* <h4>

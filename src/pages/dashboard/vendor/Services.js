@@ -200,7 +200,7 @@ function VendorServices({ setSidebar, sidebar }) {
             className="btn btn-solid btn-solid-primary soi-success-btn"
             onClick={() => {
               setDeleteSuccessfulPopup(false);
-              navigate("/agricultural-services");
+              navigate("/vendor-agricultural-services");
             }}
           >
             Continue
@@ -247,7 +247,7 @@ function VendorServices({ setSidebar, sidebar }) {
                 <div className="col-7 d-flex justify-content-end">
                   <button
                     onClick={() => {
-                      navigate("/agricultural-services/add-service", {
+                      navigate("/vendor-agricultural-services/add-service", {
                         state: { addProduct: true },
                       });
                     }}

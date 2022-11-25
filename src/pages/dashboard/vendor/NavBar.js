@@ -2,9 +2,11 @@ import React from "react";
 import { FaBars, FaBell } from "react-icons/fa";
 import Images from "../../../constants/images";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar({ setSidebar, sidebar, title }) {
   const { user } = useSelector((state) => state.authReducer);
+  const navigate = useNavigate();
 
   return (
     <nav className="trader-profile-navbar">
@@ -21,7 +23,14 @@ export default function NavBar({ setSidebar, sidebar, title }) {
         <h2>{title}</h2>
       </div>
       <div className="trader-profile-navbar_right">
-        <div className="trader-profile-navbar_right_notification-wrapper">
+        <div
+          className="trader-profile-navbar_right_notification-wrapper cursor-pointer"
+          onClick={() => {
+            navigate("/vendor-notifications", {
+              params: { id: "12345797564" },
+            });
+          }}
+        >
           <FaBell className="trader-profile-navbar_right_notification-wrapper_icon" />
           <span className="trader-profile-navbar_right_notification-wrapper_count">
             3

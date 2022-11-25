@@ -1,65 +1,64 @@
-import React, { useState, useEffect } from 'react'
-import { FaAngleLeft, FaRegPaperPlane } from 'react-icons/fa'
-import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
-import moment from 'moment'
+import React, { useState, useEffect } from "react";
+import { FaAngleLeft, FaRegPaperPlane } from "react-icons/fa";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import moment from "moment";
 import {
   DELETE_TRADE_REQUEST_ACTION,
   CREATE_TRADE_REQUEST_MESSAGE_ACTION,
   GET_TRADE,
-} from '../../../../redux/actions/trades'
-import TradeRequestMessageReply from './TradeRequestMessageReply'
+} from "../../../../redux/actions/trades";
+import TradeRequestMessageReply from "./TradeRequestMessageReply";
 // import ReactImageMagnify from "react-image-magnify";
 
 export default function TradeRequest({ setView, singleTrade }) {
   const { trade, createtradeRequestMessage } = useSelector(
-    (state) => state.TradesReducers,
-  )
-  const { _id } = JSON.parse(localStorage.getItem('userData'))
-  const [previewImage, setPeviewImage] = useState(trade ? trade?.images[0] : '')
-  const dispatch = useDispatch()
-  const [tradeRequestComment, settradeRequestComment] = useState('')
+    (state) => state.TradesReducers
+  );
+  // const { _id } = JSON.parse(localStorage.getItem("userData"));
+  const [previewImage, setPeviewImage] = useState(
+    trade ? trade?.images[0] : ""
+  );
+  const dispatch = useDispatch();
+  const [tradeRequestComment, settradeRequestComment] = useState("");
   // handle image change
 
   const handleReplyRequest = (tradeRequestId) => {
-    if (tradeRequestComment != '') {
+    if (tradeRequestComment != "") {
       const data = {
         tradeRequestId,
-        traderId: _id,
+        // traderId: _id,
         tradeRequestComment,
-      }
-      dispatch(
-        CREATE_TRADE_REQUEST_MESSAGE_ACTION(
-          data,
-          localStorage.getItem('token'),
-        ),
-      )
-      settradeRequestComment('')
+      };
+      // dispatch(
+      //   CREATE_TRADE_REQUEST_MESSAGE_ACTION(data, localStorage.getItem("token"))
+      // );
+      settradeRequestComment("");
     } else {
     }
-  }
+  };
   const handleImageChange = (e, image) => {
-    setPeviewImage(image)
+    setPeviewImage(image);
     const elems = document.querySelectorAll(
-      '.trader-trade-request-wrapper_image-desc-wrapper_trade-image-wrapper_trade-thumbs_trade-thumb-image',
-    )
+      ".trader-trade-request-wrapper_image-desc-wrapper_trade-image-wrapper_trade-thumbs_trade-thumb-image"
+    );
     elems.forEach((elem) => {
-      elem.classList.remove('image-thumb-active')
-    })
-    e.target.classList.add('image-thumb-active')
-  }
+      elem.classList.remove("image-thumb-active");
+    });
+    e.target.classList.add("image-thumb-active");
+  };
   useEffect(() => {
     if (createtradeRequestMessage) {
-      dispatch(GET_TRADE(trade._id, localStorage.getItem('token')))
-      settradeRequestComment('')
+      dispatch(GET_TRADE(trade._id, localStorage.getItem("token")));
+      settradeRequestComment("");
     }
-  }, [createtradeRequestMessage])
+  }, [createtradeRequestMessage]);
 
   return (
     <>
       <div className="trader-trade-request-wrapper mt-5">
         <div className="trader-trade-request-wrapper_top-wrapper">
-          {' '}
+          {" "}
           <h2 className="fs-2">View Trade Product</h2>
           <div
             className="trader-trade-request-wrapper_top-wrapper_icon-wrapper"
@@ -82,11 +81,11 @@ export default function TradeRequest({ setView, singleTrade }) {
                     className="trader-trade-request-wrapper_image-desc-wrapper_trade-image-wrapper_trade-thumbs_trade-thumb-image"
                     src={image}
                     onClick={(e) => {
-                      handleImageChange(e, image)
+                      handleImageChange(e, image);
                     }}
                     alt="trade"
                   />
-                )
+                );
               })}
             </div>
           </div>
@@ -97,12 +96,12 @@ export default function TradeRequest({ setView, singleTrade }) {
                 <p>{trade?.inSearchOf}</p>
               </div>
 
-              <Link to={'/trade/' + trade?._id}>
+              <Link to={"/trade/" + trade?._id}>
                 <div className="trader-trade-request-wrapper_image-desc-wrapper_trade-description_top_right">
                   <div className="trader-trade-request-wrapper_image-desc-wrapper_trade-description_top_right_seller-details-wrapper">
                     <button
                       className="btn btn-solid btn-solid-primary"
-                      style={{ width: '15rem' }}
+                      style={{ width: "15rem" }}
                     >
                       View Post
                     </button>
@@ -140,7 +139,7 @@ export default function TradeRequest({ setView, singleTrade }) {
                     <h3 className="fs-3 tab-content_ratings-reviews_customer-reviews-wrapper_title">
                       Comments
                     </h3>
-                    {trade?.tradeRequests.length != 0
+                    {trade?.tradeRequests.length > 0
                       ? trade?.tradeRequests.map((trade_request, index) => {
                           return (
                             <div
@@ -151,14 +150,14 @@ export default function TradeRequest({ setView, singleTrade }) {
                                 <div className="tab-content_ratings-reviews_customer-reviews-wrapper_review_inner-wrapper_left">
                                   <h4 className="fs-4 tab-content_ratings-reviews_customer-reviews-wrapper_review_inner-wrapper_left_name">
                                     {trade_request?.user.firstName +
-                                      ' ' +
+                                      " " +
                                       trade_request?.user.lastName}
                                   </h4>
 
                                   <span className="tab-content_ratings-reviews_customer-reviews-wrapper_review_inner-wrapper_left_date">
                                     {moment(trade_request?.createdAt).format(
-                                      'MMM DD YYYY h:mm A',
-                                    )}{' '}
+                                      "MMM DD YYYY h:mm A"
+                                    )}{" "}
                                   </span>
                                 </div>
                                 <div
@@ -166,9 +165,9 @@ export default function TradeRequest({ setView, singleTrade }) {
                                     dispatch(
                                       DELETE_TRADE_REQUEST_ACTION(
                                         trade_request._id,
-                                        localStorage.getItem('token'),
-                                      ),
-                                    )
+                                        localStorage.getItem("token")
+                                      )
+                                    );
                                   }}
                                   className="tab-content_ratings-reviews_customer-reviews-wrapper_review_inner-wrapper_right"
                                 >
@@ -188,18 +187,18 @@ export default function TradeRequest({ setView, singleTrade }) {
                                       <div className="tab-content_ratings-reviews_customer-reviews-wrapper_review_replay-wrapper_inner-wrapper">
                                         <h3 className="fs-3 tab-content_ratings-reviews_customer-reviews-wrapper_review_replay-wrapper_inner-wrapper_name">
                                           {item1.traderId.firstName +
-                                            ' ' +
+                                            " " +
                                             item1.traderId.lastName}
                                           <span className="title-color fs-6">
                                             (Trader)
                                           </span>
 
                                           <span className="tab-content_ratings-reviews_customer-reviews-wrapper_review_inner-wrapper_left_date">
-                                            {' ' +
+                                            {" " +
                                               moment(
-                                                trade_request?.createdAt,
-                                              ).format('MMM DD YYYY h:mm A') +
-                                              ' '}{' '}
+                                                trade_request?.createdAt
+                                              ).format("MMM DD YYYY h:mm A") +
+                                              " "}{" "}
                                           </span>
                                         </h3>
                                       </div>
@@ -207,8 +206,8 @@ export default function TradeRequest({ setView, singleTrade }) {
                                         {item1?.tradeRequestComment}
                                       </p>
                                     </>
-                                  )
-                                },
+                                  );
+                                }
                               )}
                               <br />
                               <TradeRequestMessageReply
@@ -218,9 +217,9 @@ export default function TradeRequest({ setView, singleTrade }) {
                                 tradeRequestComment={tradeRequestComment}
                               />
                             </div>
-                          )
+                          );
                         })
-                      : 'No Comments Found!'}
+                      : "No Comments Found!"}
                     <div></div>
                   </div>
                 </div>
@@ -231,5 +230,5 @@ export default function TradeRequest({ setView, singleTrade }) {
         </div>
       </div>
     </>
-  )
+  );
 }

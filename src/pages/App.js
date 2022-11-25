@@ -21,10 +21,11 @@ function App() {
     <>
       <Provider store={store}>
         <ToastContainer
+          style={{ fontSize: 10 }}
           theme="dark"
           position="bottom-left"
           closeOnClick={true}
-          pauseOnHover={false}
+          pauseOnHover={true}
         />
         <Navigation />
       </Provider>

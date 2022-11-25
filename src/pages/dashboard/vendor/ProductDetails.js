@@ -176,7 +176,7 @@ const ProductDetails = ({ setSidebar, sidebar }) => {
           </h3>
         </div>
       </div>
-      <div className="bg-black-pad my-5 " style={{ height: "85vh" }}>
+      <div className="bg-black-pad my-5 " style={{ height: "82vh" }}>
         <div className="soi-top ">
           <div className="row">
             <div className="col-4 col-sm-12 col-md-4 col-lg-4 soi-orderNo">
@@ -186,7 +186,7 @@ const ProductDetails = ({ setSidebar, sidebar }) => {
             <div className="col-6 col-sm-12 col-md-6 col-lg-6 d-flex justify-content-end align-items-center">
               <button
                 onClick={() => {
-                  navigate("/my-products/details/edit");
+                  navigate("/vendor-my-products/details/edit");
                 }}
                 className="btn btn-solid btn-solid-primary soi-btn mx-2"
                 style={{ width: "fit-content" }}
@@ -202,7 +202,7 @@ const ProductDetails = ({ setSidebar, sidebar }) => {
               </button>
               <button
                 className="btn btn-solid btn-solid-process soi-btn "
-                onClick={() => navigate("/make-it-featured")}
+                onClick={() => navigate("/vendor-make-it-featured")}
                 style={{ width: "fit-content" }}
               >
                 Make it Featured

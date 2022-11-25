@@ -1,21 +1,25 @@
-import { useState, useEffect } from 'react'
-import { FaSearch, FaAngleDown, FaFilter } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import moment from 'moment'
+import { useState, useEffect } from "react";
+import { FaSearch, FaAngleDown, FaFilter } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import moment from "moment";
 
-import { GET_All_SELLER_TRADES } from '../../../../redux/actions/trades'
-import TradeRequestItem from './TradeRequestItem'
+import { GET_All_SELLER_TRADES } from "../../../../redux/actions/trades";
+import TradeRequestItem from "./TradeRequestItem";
 export default function TradeList({ setView, view }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const { traderTrades } = useSelector((state) => state.TradesReducers)
+  // const { traderTrades } = useSelector((state) => state.TradesReducers);
 
-  const { _id } = JSON.parse(localStorage.getItem('userData'))
+  const traderTrades = [
+    { _id: "1", inSearchOf: "sajgd", toExchangeWith: "kjhakjh" },
+  ];
 
-  useEffect(() => {
-    dispatch(GET_All_SELLER_TRADES(_id, localStorage.getItem('token')))
-  }, [])
+  // const { _id } = JSON.parse(localStorage.getItem("userData"));
+
+  // useEffect(() => {
+  //   dispatch(GET_All_SELLER_TRADES(_id, localStorage.getItem('token')))
+  // }, [])
 
   return (
     <>
@@ -105,7 +109,7 @@ export default function TradeList({ setView, view }) {
                 <th className="li-product-price">Last Commented Date</th>
                 <th
                   className="li-product-subtotal"
-                  style={{ textAlign: 'left' }}
+                  style={{ textAlign: "left" }}
                 >
                   Action
                 </th>
@@ -113,12 +117,12 @@ export default function TradeList({ setView, view }) {
             </thead>
             <tbody>
               {traderTrades?.map((order, index) => {
-                return <TradeRequestItem props={order} setView={setView} />
+                return <TradeRequestItem props={order} setView={setView} />;
               })}
             </tbody>
           </table>
         </div>
       </article>
     </>
-  )
+  );
 }

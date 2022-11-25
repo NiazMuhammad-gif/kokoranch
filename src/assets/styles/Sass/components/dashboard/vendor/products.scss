@@ -59,4 +59,48 @@ background-image: linear-gradient(#BEDC7C, #14A384);
   height: 20px;
   border-radius: 2px;
 }
+.edit-product-container::-webkit-scrollbar{
+  display: none;
+}
+.vendor-setting-form-wrapper{
+  border: 1px solid $color-primary;
+  border-radius: 20px;
+  margin-top: 10px;
+  padding: 2rem;
+  .form-control {
+    border-color: white;
+    border-radius: 1rem;
+    color: white;
+    padding: 1rem 1.5rem;
+    // height: rem;
+    margin-top: 10px;
+    &::-webkit-input-placeholder {
+      color: $color-white;
+    }
+    &::-moz-placeholder {
+      color: $color-white;
+    }
+    &:-ms-input-placeholder {
+      color: $color-white;
+    }
+    &::placeholder {
+      color: $color-white;
+    }
+  }
+  & button{
+    margin-top: 10px;
+    border-radius: 1rem;
+    height: 5rem;
+    width: 100%;
 
+  }
+}
+.vendor-setting-wrapper-right{
+  border: 1px solid $color-primary;
+  border-radius: 20px;
+  margin-top: 10px;
+  padding: 2rem;
+}
+.display-none-wrapper::-webkit-scrollbar{
+  
+}

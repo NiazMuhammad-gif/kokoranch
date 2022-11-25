@@ -7,7 +7,16 @@ import NavBar from "./NavBar";
 export default function Profile({ setSidebar, sidebar }) {
   const [editAble, setEditAble] = useState(false);
   const [bankEditable, setBankEditable] = useState(false);
+  const [profileImage, setProfileImage] = useState("");
 
+  const changeProfileImage = (e) => {
+    console.log("target", URL.createObjectURL(e.target.files[0]));
+    setProfileImage(URL.createObjectURL(e.target.files[0]));
+    let reader = new FileReader();
+    reader.onload = (e) => {};
+    reader.readAsDataURL(e.target.files[0]);
+    console.log("reader", reader.result);
+  };
   return (
     <>
       <NavBar setSidebar={setSidebar} sidebar={sidebar} title="My Profile" />
@@ -18,10 +27,14 @@ export default function Profile({ setSidebar, sidebar }) {
             <div className="col-3 col-sm-2 col-md-2 col-lg-2">
               <div className="vendor-profile-main_form_image-input-wrapper">
                 <img
-                  src={Images.Pictures.profile}
+                  src={profileImage ? profileImage : Images.Pictures.profile}
                   className="vendor-profile-main_form_image-input-wrapper_preview"
                   alt="vendor-preview"
-                  style={{ width: "10rem", height: "10rem" }}
+                  style={{
+                    width: "10rem",
+                    height: "10rem",
+                    objectFit: "cover",
+                  }}
                 />
 
                 {editAble ? (
@@ -29,9 +42,7 @@ export default function Profile({ setSidebar, sidebar }) {
                     <input
                       type="file"
                       onChange={(e) => {
-                        let reader = new FileReader();
-                        reader.onload = (e) => {};
-                        reader.readAsDataURL(e.target.files[0]);
+                        changeProfileImage(e);
                       }}
                       className="vendor-profile-main_form_image-input-wrapper_input"
                     />
