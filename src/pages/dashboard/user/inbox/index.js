@@ -67,27 +67,32 @@ export default function MyProfile() {
                 className="chat-search-input form-control"
                 placeholder="Search for contacts"
               />
-              {users.map((element, index) => {
-                return (
-                  <li
-                    className="recipient-item"
-                    onClick={(e) => {
-                      setRecipient(element);
-                      handleClassChange(e);
-                    }}
-                  >
-                    <img src={element.image} alt="User" />
-                    <div>
-                      <h2>{`${element.firstName} ${element.lastName}`}</h2>
-                      <h3>Lorem ipsum dolor sit.</h3>
-                    </div>
-                    <div>
-                      <div>25 min</div>
-                      <div className="unread-count">2</div>
-                    </div>
-                  </li>
-                );
-              })}
+              <div
+                className="edit-product-container"
+                style={{ height: "65vh", overflowY: "scroll" }}
+              >
+                {users.map((element, index) => {
+                  return (
+                    <li
+                      className="recipient-item"
+                      onClick={(e) => {
+                        setRecipient(element);
+                        handleClassChange(e);
+                      }}
+                    >
+                      <img src={element.image} alt="User" />
+                      <div>
+                        <h2>{`${element.firstName} ${element.lastName}`}</h2>
+                        <h3>Lorem ipsum dolor sit.</h3>
+                      </div>
+                      <div>
+                        <div>25 min</div>
+                        <div className="unread-count">2</div>
+                      </div>
+                    </li>
+                  );
+                })}
+              </div>
             </ul>
           </aside>
           <Messages

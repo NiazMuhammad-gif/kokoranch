@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react'
-import Images from '../../constants/images'
-import { GET_All_CATEGORIES } from '../../redux/actions/categories'
-import { btn_List, btn_sub_List } from '../../helpers/headerData'
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import { useEffect, useState } from "react";
+import Images from "../../constants/images";
+import { GET_All_CATEGORIES } from "../../redux/actions/categories";
+import { btn_List, btn_sub_List } from "../../helpers/headerData";
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import {
   GET_All_PRODUCTS,
   GET_SEARCH_PRODUCTS_ACTION,
-} from '../../redux/actions/products'
+} from "../../redux/actions/products";
 
 import {
   FaUserAlt,
@@ -17,121 +17,121 @@ import {
   FaOpencart,
   FaBars,
   FaRegWindowClose,
-} from 'react-icons/fa'
-import Popup from '../../components/popUp/popUp'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { getAllCartItems } from '../../redux/actions/cart'
+} from "react-icons/fa";
+import Popup from "../../components/popUp/popUp";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getAllCartItems } from "../../redux/actions/cart";
 export default function Header() {
-  const Navigate = useNavigate()
+  const Navigate = useNavigate();
 
-  const location = useLocation()
-  const [popupOpen, setPopupOpen] = useState(false)
-  const [mobile, setMobile] = new useState(false)
-  const [searchText, setSearchText] = new useState('')
-  const [searchType, setsearchType] = useState('')
+  const location = useLocation();
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [mobile, setMobile] = new useState(false);
+  const [searchText, setSearchText] = new useState("");
+  const [searchType, setsearchType] = useState("");
   const { isAuthenticated, userType } = useSelector(
-    (state) => state.authReducer,
-  )
+    (state) => state.authReducer
+  );
   const { categories, subCategories, subSubCategories } = useSelector(
-    (state) => state.CategoriesReducers,
-  )
-  const { cartData } = useSelector((state) => state.CartReducers)
-  const { Allproducts } = useSelector((state) => state.ProductsReducers)
-  const { wishlist } = useSelector((state) => state.WishlistReducers)
-  const dispatch = useDispatch()
+    (state) => state.CategoriesReducers
+  );
+  const { cartData } = useSelector((state) => state.CartReducers);
+  const { Allproducts } = useSelector((state) => state.ProductsReducers);
+  const { wishlist } = useSelector((state) => state.WishlistReducers);
+  const dispatch = useDispatch();
   const closeSideBar = (e) => {
-    e.preventDefault()
-    setMobile(false)
-    document.getElementsByTagName('html')[0].style.overflowY = 'scroll'
-  }
+    e.preventDefault();
+    setMobile(false);
+    document.getElementsByTagName("html")[0].style.overflowY = "scroll";
+  };
   const handleSearchProducts = () => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token");
     const condition = {
       searchText: searchText,
       category: searchType,
-    }
+    };
     if (searchText && searchType) {
-      dispatch(GET_SEARCH_PRODUCTS_ACTION(condition, token))
+      dispatch(GET_SEARCH_PRODUCTS_ACTION(condition, token));
     }
-  }
+  };
   const detectElementPosition = (e) => {
-    let bodyRect = document.body.getBoundingClientRect()
-    const element = e.target
-    if (element.parentNode.tagName === 'UL') {
-      const elemRect = element.getBoundingClientRect()
-      const offset = elemRect.right - bodyRect.right
+    let bodyRect = document.body.getBoundingClientRect();
+    const element = e.target;
+    if (element.parentNode.tagName === "UL") {
+      const elemRect = element.getBoundingClientRect();
+      const offset = elemRect.right - bodyRect.right;
       if (Math.floor(offset) >= -200) {
-        element.children[1].classList.remove('sub-menu-left')
-        element.children[1].classList.add('sub-menu-right')
+        element.children[1].classList.remove("sub-menu-left");
+        element.children[1].classList.add("sub-menu-right");
       }
     }
-  }
+  };
   const handleSelectSearchType = (searchType) => {
-    setsearchType(searchType)
-  }
+    setsearchType(searchType);
+  };
 
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
     // the string searched and for the second the results.
-    console.log(string, results)
-  }
+    console.log(string, results);
+  };
   const handleOnSelect = (item) => {
     // the item selected
-    console.log(item)
-    setSearchText(item.name)
-    setsearchType(item.category.category)
-  }
+    console.log(item);
+    setSearchText(item.name);
+    setsearchType(item.category.category);
+  };
 
   const formatResult = (item) => {
     return (
       <>
-        <span style={{ textAlign: 'left', display: 'block' }}>{item.name}</span>
+        <span style={{ textAlign: "left", display: "block" }}>{item.name}</span>
         {/* <span style={{ textAlign: 'left', display: 'block' }}>
           Category Type :{item.category.category}
         </span> */}
       </>
-    )
-  }
+    );
+  };
 
   // GETING DATA
   useEffect(() => {
-    dispatch(GET_All_CATEGORIES())
-    dispatch(GET_All_PRODUCTS())
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+    dispatch(GET_All_CATEGORIES());
+    dispatch(GET_All_PRODUCTS());
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
-    dispatch(getAllCartItems())
-  }, [cartData]) // eslint-disable-line react-hooks/exhaustive-deps
+    dispatch(getAllCartItems());
+  }, [cartData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const scrollToTopFunction = () => {
-    document.body.scrollTop = 0
-    document.documentElement.scrollTop = 0
-  }
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  };
 
   useEffect(() => {
     // When the user scrolls down 20px from the top of the document, show the button
-    if (location.pathname === '/') {
+    if (location.pathname === "/") {
       const scrollFunction = () => {
-        let mybutton = document.getElementById('Arrow-up-btn')
+        let mybutton = document.getElementById("Arrow-up-btn");
         if (
           document.body.scrollTop > 30 ||
           document.documentElement.scrollTop > 30
         ) {
-          mybutton.style.display = 'flex'
+          mybutton.style.display = "flex";
         } else {
-          mybutton.style.display = 'none'
+          mybutton.style.display = "none";
         }
-      }
-      window.addEventListener('scroll', scrollFunction)
-      return () => window.addEventListener('scroll', scrollFunction)
+      };
+      window.addEventListener("scroll", scrollFunction);
+      return () => window.addEventListener("scroll", scrollFunction);
     }
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <>
       <header id="home" className="main-header" style={{ paddingInline: 35 }}>
         {/* Cheching path for diffrent HEADER  */}
-        {location.pathname !== '/vendor-register' &&
-        location.pathname !== '/vendor-signup-success' ? (
+        {location.pathname !== "/vendor-register" &&
+        location.pathname !== "/vendor-signup-success" ? (
           <>
             {/* TOP HEADER  */}
             <div className="top-header top-header-black">
@@ -169,8 +169,8 @@ export default function Header() {
                       <li>
                         <Link to="/login">
                           <strong>
-                            <FaUserAlt className="icon-light" />{' '}
-                            {isAuthenticated ? 'My Account' : 'LOGIN'}
+                            <FaUserAlt className="icon-light" />{" "}
+                            {isAuthenticated ? "My Account" : "LOGIN"}
                           </strong>
                         </Link>
                       </li>
@@ -209,7 +209,7 @@ export default function Header() {
                           /> */}
                           <div
                             style={{
-                              width: '80%',
+                              width: "65%",
                             }}
                           >
                             <ReactSearchAutocomplete
@@ -221,17 +221,24 @@ export default function Header() {
                               formatResult={formatResult}
                             />
                           </div>
-                          <div className="mid-header_main-menu_search-box1_category-menu">
+                          <div
+                            className="mid-header_main-menu_search-box1_category-menu"
+                            style={
+                              {
+                                // width: "20%",
+                              }
+                            }
+                          >
                             <div className="dropdown ">
                               <button
-                                style={{ height: '46px' }}
+                                style={{ height: "46px" }}
                                 className="btn btn-secondary dropdown-toggle "
                                 type="button"
                                 id="dropdownMenuButton1"
                                 data-bs-toggle="dropdown"
                               >
-                                {searchType == ''
-                                  ? 'Select Category'
+                                {searchType == ""
+                                  ? "Select Category"
                                   : searchType}
                                 <FaAngleDown />
                               </button>
@@ -241,7 +248,7 @@ export default function Header() {
                               >
                                 <li
                                   onClick={() => {
-                                    handleSelectSearchType('All')
+                                    handleSelectSearchType("All");
                                   }}
                                 >
                                   <Link className="dropdown-item" to="#">
@@ -250,7 +257,7 @@ export default function Header() {
                                 </li>
                                 <li
                                   onClick={() => {
-                                    handleSelectSearchType(' Vendor / Trader')
+                                    handleSelectSearchType(" Vendor / Trader");
                                   }}
                                 >
                                   <Link className="dropdown-item" to="#">
@@ -260,17 +267,17 @@ export default function Header() {
 
                                 {categories
                                   ?.filter((element) => {
-                                    if (searchType !== '') {
-                                      return element.category === searchType
+                                    if (searchType !== "") {
+                                      return element.category === searchType;
                                     } else {
-                                      return element
+                                      return element;
                                     }
                                   })
                                   .map((item) => {
                                     return (
                                       <li
                                         onClick={() => {
-                                          handleSelectSearchType(item.category)
+                                          handleSelectSearchType(item.category);
                                         }}
                                         key={item._id}
                                       >
@@ -278,13 +285,16 @@ export default function Header() {
                                           {item.category}
                                         </Link>
                                       </li>
-                                    )
+                                    );
                                   })}
                               </ul>
                             </div>
                           </div>
 
                           <Link
+                            style={{
+                              width: "10%",
+                            }}
                             to={
                               searchType && searchText
                                 ? `/search/${searchType}/${searchText}`
@@ -295,7 +305,7 @@ export default function Header() {
                               onClick={() => handleSearchProducts()}
                               type="button"
                               className="btn btn-solid btn-solid-primary-rounded d-sm-block d-none mx-2"
-                              style={{ paddingInline: '4rem' }}
+                              style={{ paddingInline: "4rem" }}
                             >
                               Search
                             </button>
@@ -312,12 +322,12 @@ export default function Header() {
                               <Link
                                 to="#"
                                 onClick={(e) => {
-                                  e.preventDefault()
-                                  setMobile(true)
+                                  e.preventDefault();
+                                  setMobile(true);
                                   // document.body.style.overflowY = "hidden";
                                   document.getElementsByTagName(
-                                    'html',
-                                  )[0].style.overflow = 'hidden'
+                                    "html"
+                                  )[0].style.overflow = "hidden";
                                 }}
                               >
                                 <FaBars className="light-icon" />
@@ -329,9 +339,9 @@ export default function Header() {
                               className="cart-media"
                               onClick={() => {
                                 if (isAuthenticated) {
-                                  Navigate('/wishlist')
+                                  Navigate("/wishlist");
                                 } else {
-                                  setPopupOpen(true)
+                                  setPopupOpen(true);
                                 }
                               }}
                             >
@@ -349,9 +359,9 @@ export default function Header() {
                               className="cart-media"
                               onClick={() => {
                                 if (isAuthenticated) {
-                                  Navigate('/cart')
+                                  Navigate("/cart");
                                 } else {
-                                  setPopupOpen(true)
+                                  setPopupOpen(true);
                                 }
                               }}
                             >
@@ -384,18 +394,18 @@ export default function Header() {
                           key={`cat-${cat._id}`}
                           className="nav-menu-li"
                           onMouseOver={(e) => {
-                            detectElementPosition(e)
+                            detectElementPosition(e);
                           }}
                         >
-                          <Link to={'/'}>
-                            {cat.category}{' '}
+                          <Link to={"/"}>
+                            {cat.category}{" "}
                             {subCategories.filter(
-                              (subcat) => subcat.category._id === cat._id,
+                              (subcat) => subcat.category._id === cat._id
                             ).length > 0 && <FaAngleDown></FaAngleDown>}
                           </Link>
 
                           {subCategories.filter(
-                            (subcat) => subcat.category._id === cat._id,
+                            (subcat) => subcat.category._id === cat._id
                           ).length > 0 && (
                             <ul className="sub-menu sub-menu-left">
                               {subCategories.map((sub_cat, sub_cat_index) => {
@@ -406,20 +416,20 @@ export default function Header() {
                                       {subSubCategories.filter(
                                         (subSubCat) =>
                                           subSubCat.subCategory._id ===
-                                          sub_cat._id,
+                                          sub_cat._id
                                       ).length > 0 && (
                                         <FaAngleRight></FaAngleRight>
                                       )}
                                       {subSubCategories.filter(
                                         (subSubCat) =>
                                           subSubCat.subCategory._id ===
-                                          sub_cat._id,
+                                          sub_cat._id
                                       ).length > 0 && (
                                         <ul className="sub-menu sub-menu-left">
                                           {subSubCategories.map(
                                             (
                                               sub_sub_cat,
-                                              sub_sub_cat_index,
+                                              sub_sub_cat_index
                                             ) => {
                                               return (
                                                 sub_cat._id ===
@@ -432,19 +442,19 @@ export default function Header() {
                                                     {sub_sub_cat.subSubCategory}
                                                   </li>
                                                 )
-                                              )
-                                            },
+                                              );
+                                            }
                                           )}
                                         </ul>
                                       )}
                                     </li>
                                   )
-                                )
+                                );
                               })}
                             </ul>
                           )}
                         </li>
-                      )
+                      );
                     })}
                 </ul>
               </nav>
@@ -482,13 +492,13 @@ export default function Header() {
                                         )}
                                       </li>
                                     )
-                                  )
-                                },
+                                  );
+                                }
                               )}
                             </ul>
                           )}
                         </li>
-                      )
+                      );
                     })}
                   </ul>
                 </li>
@@ -533,8 +543,8 @@ export default function Header() {
       {mobile ? (
         <>
           <div className="bg-overlay show" onClick={closeSideBar}></div>
-          <div className={`side-bar ${mobile ? 'side-bar-show' : null}`}>
-            <div className="m-3 fs-2" style={{ cursor: 'pointer' }}>
+          <div className={`side-bar ${mobile ? "side-bar-show" : null}`}>
+            <div className="m-3 fs-2" style={{ cursor: "pointer" }}>
               <FaRegWindowClose onClick={closeSideBar} />
             </div>
             <div className="d-flex flex-column">
@@ -547,14 +557,14 @@ export default function Header() {
                     <li
                       className="mt-3"
                       key={`mobile-cat${cat._id}`}
-                      style={{ display: 'block' }}
+                      style={{ display: "block" }}
                     >
                       <div
                         className="form-check custome-form-check justify-content-between"
                         style={{
-                          display: 'grid',
-                          gridTemplateColumns: 'max-content 1fr',
-                          gridTemplateRows: '1fr',
+                          display: "grid",
+                          gridTemplateColumns: "max-content 1fr",
+                          gridTemplateRows: "1fr",
                         }}
                       >
                         <label
@@ -562,17 +572,17 @@ export default function Header() {
                           className="form-check-label"
                           htmlFor={`${cat.category}_box${index}`}
                         >
-                          <Link to={'/'}>{cat.category}</Link>
+                          <Link to={"/"}>{cat.category}</Link>
                         </label>
                         {subCategories.filter(
-                          (subcat) => subcat.category._id === cat._id,
+                          (subcat) => subcat.category._id === cat._id
                         ).length > 0 && (
                           <Link
                             to={`#sub-cat-${cat._id}${index}`}
                             className="mx-2"
                             data-bs-toggle="collapse"
                           >
-                            <FaAngleDown style={{ float: 'right' }} />
+                            <FaAngleDown style={{ float: "right" }} />
                           </Link>
                         )}
                       </div>
@@ -588,14 +598,14 @@ export default function Header() {
                                 <li
                                   className="mt-3"
                                   key={`mobile-sub-cat${sub_cat._id}`}
-                                  style={{ display: 'block' }}
+                                  style={{ display: "block" }}
                                 >
                                   <div
                                     className="form-check custome-form-check justify-content-between"
                                     style={{
-                                      display: 'grid',
-                                      gridTemplateColumns: 'max-content 1fr',
-                                      gridTemplateRows: '1fr',
+                                      display: "grid",
+                                      gridTemplateColumns: "max-content 1fr",
+                                      gridTemplateRows: "1fr",
                                     }}
                                   >
                                     <label
@@ -603,14 +613,14 @@ export default function Header() {
                                       className="form-check-label"
                                       htmlFor={`${sub_cat.subCategory}_box${index}`}
                                     >
-                                      <Link to={'/'}>
+                                      <Link to={"/"}>
                                         {sub_cat.subCategory}
                                       </Link>
                                     </label>
                                     {subSubCategories.filter(
                                       (subSubcat) =>
                                         subSubcat.subCategory._id ===
-                                        sub_cat._id,
+                                        sub_cat._id
                                     ).length > 0 && (
                                       <Link
                                         to={`#sub-sub-cat-${sub_cat._id}${index}`}
@@ -618,7 +628,7 @@ export default function Header() {
                                         data-bs-toggle="collapse"
                                       >
                                         <FaAngleDown
-                                          style={{ float: 'right' }}
+                                          style={{ float: "right" }}
                                         />
                                       </Link>
                                     )}
@@ -637,15 +647,15 @@ export default function Header() {
                                               <li
                                                 className="mt-3"
                                                 key={`mobile-sub-sub-cat${sub_sub_cat._id}`}
-                                                style={{ display: 'block' }}
+                                                style={{ display: "block" }}
                                               >
                                                 <div
                                                   className="form-check custome-form-check justify-content-between"
                                                   style={{
-                                                    display: 'grid',
+                                                    display: "grid",
                                                     gridTemplateColumns:
-                                                      'max-content 1fr',
-                                                    gridTemplateRows: '1fr',
+                                                      "max-content 1fr",
+                                                    gridTemplateRows: "1fr",
                                                   }}
                                                 >
                                                   <label
@@ -653,7 +663,7 @@ export default function Header() {
                                                     className="form-check-label"
                                                     htmlFor={`${sub_sub_cat.subSubCategory}_box${index}`}
                                                   >
-                                                    <Link to={'/'}>
+                                                    <Link to={"/"}>
                                                       {
                                                         sub_sub_cat.subSubCategory
                                                       }
@@ -667,7 +677,7 @@ export default function Header() {
                                                     >
                                                       <FaAngleDown
                                                         style={{
-                                                          float: 'right',
+                                                          float: "right",
                                                         }}
                                                       />
                                                     </Link>
@@ -675,21 +685,21 @@ export default function Header() {
                                                 </div>
                                               </li>
                                             )
-                                          )
-                                        },
+                                          );
+                                        }
                                       )}
                                     </ul>
                                   </div>
                                   {/* sub sub category end */}
                                 </li>
                               )
-                            )
+                            );
                           })}
                         </ul>
                       </div>
                       {/* subcategory end */}
                     </li>
-                  )
+                  );
                 })}
               </ul>
             </div>
@@ -715,11 +725,11 @@ export default function Header() {
           </Link>
         </div>
       </Popup>
-      {location.pathname === '/' && (
+      {location.pathname === "/" && (
         <div id="Arrow-up-btn" onClick={scrollToTopFunction}>
           <FaAngleUp />
         </div>
       )}
     </>
-  )
+  );
 }

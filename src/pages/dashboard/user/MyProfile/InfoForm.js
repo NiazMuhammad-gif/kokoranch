@@ -18,18 +18,19 @@ export default function InfoForm({ setFormChange }) {
   const [isLoading, setLoading] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
   // USER DATA
-  const { user, token } = useSelector((state) => state.authReducer);
-  useEffect(() => {
-    setValue("_id", user?._id);
-    setValue("firstName", user?.firstName);
-    setValue("lastName", user?.lastName);
-    setValue("email", user?.email);
-    setValue("contact", user?.contact?.toString());
-  }, [user, setValue]); // eslint-disable-line react-hooks/exhaustive-deps
+  const user = {};
+  // const { user, token } = useSelector((state) => state.authReducer);
+  // useEffect(() => {
+  //   setValue("_id", user?._id);
+  //   setValue("firstName", user?.firstName);
+  //   setValue("lastName", user?.lastName);
+  //   setValue("email", user?.email);
+  //   setValue("contact", user?.contact?.toString());
+  // }, [user, setValue]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const onsubmit = (data) => {
-    setLoading(true);
-    dispatch(UPDATE_USER(data, token, setLoading, setPopupOpen));
+    // setLoading(true);
+    // dispatch(UPDATE_USER(data, token, setLoading, setPopupOpen));
   };
   return (
     <>

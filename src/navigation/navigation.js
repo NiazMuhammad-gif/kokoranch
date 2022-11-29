@@ -10,9 +10,9 @@ import FullScreenLoader from "../components/FullScreenLoader";
 import VendorSideBar from "../pages/dashboard/vendor/SideBar";
 
 // PROTECTIVE ROUTE
-// import ProtectedRoute from "./authetication";
-// import { useDispatch, useSelector } from "react-redux";
-// import { CHECK_TOKEN } from "../redux/actions/authentication";
+import ProtectedRoute from "./authetication";
+import { useDispatch, useSelector } from "react-redux";
+import { CHECK_TOKEN } from "../redux/actions/authentication";
 import ServiceOrderIndividual from "../pages/dashboard/vendor/ServiceOrderIndividual";
 
 // SCREENS
@@ -161,19 +161,21 @@ const VendorNotifications = React.lazy(() =>
 );
 const Home = React.lazy(() => import("../pages/screens/home"));
 export default function Navigation() {
+  // const isAuthenticated = true;
+  // const userType = "buyer";
   // INITIZING STORAGES
-  // const { isAuthenticated, userType } = useSelector(
-  //   (state) => state.authReducer
-  // );
-  // const tokenStorage = localStorage.getItem("token");
+  const { isAuthenticated, userType } = useSelector(
+    (state) => state.authReducer
+  );
+  const tokenStorage = localStorage.getItem("token");
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   // CHECKING FOR AUTHENTICATION
-  // useEffect(() => {
-  //   if (tokenStorage && !isAuthenticated) {
-  //     dispatch(CHECK_TOKEN(tokenStorage));
-  //   }
-  // }, [tokenStorage, isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (tokenStorage && !isAuthenticated) {
+      dispatch(CHECK_TOKEN(tokenStorage));
+    }
+  }, [tokenStorage, isAuthenticated]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Routes>
@@ -221,6 +223,323 @@ export default function Navigation() {
               <SignupSuccess />
             </Layout>
           </Suspense>
+        }
+      />
+      <Route
+        path="/about"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              {" "}
+              <About />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/contact"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <ContactUs />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/terms"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Terms />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/faq"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <FAQS />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/policy"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Policy />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/categories"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Categories />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/sub_categories/:id"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <SubCategories />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/sub_sub_categories/:id"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <SubSubCategories />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/products/:id"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Products />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/products"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Products />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/product/:id"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Product />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/seller-products"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <SellerProducts />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/seller-services"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <SellerServices />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/seller-trades/:traderId"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <SellerTrades />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/cart"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Cart />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/checkout"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Checkout />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/payment"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Payment />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/search/:searchCategory/:searchText"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Search />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/search"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Search />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/service/:serviceId"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Service />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/services"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Services />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/trades"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Trades />
+            </Layout>
+          </Suspense>
+        }
+      />
+      <Route
+        path="/trade/:id"
+        element={
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <Trade />
+            </Layout>
+          </Suspense>
+        }
+      />
+      {/* BUYER DASBOARD ROUTES  */}
+      <Route
+        path="/my-profile"
+        element={
+          // <ProtectedRoute redirectTo={"/login"}>
+          <Suspense fallback={<FullScreenLoader />}>
+            <Layout>
+              <MyProfile />
+            </Layout>
+          </Suspense>
+          //{" "}
+          // </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/address-book"
+        element={
+          <ProtectedRoute redirectTo={"/login"}>
+            <Suspense fallback={<FullScreenLoader />}>
+              <Layout>
+                <AddressBook />
+              </Layout>
+            </Suspense>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/inbox"
+        element={
+          <ProtectedRoute redirectTo={"/login"}>
+            <Suspense fallback={<FullScreenLoader />}>
+              <Layout>
+                <Inbox />
+              </Layout>
+            </Suspense>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/orders-info"
+        element={
+          <ProtectedRoute redirectTo={"/login"}>
+            <Suspense fallback={<FullScreenLoader />}>
+              <Layout>
+                <OrdersInfo />
+              </Layout>
+            </Suspense>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/trade-request"
+        element={
+          <ProtectedRoute redirectTo={"/login"}>
+            <Suspense fallback={<FullScreenLoader />}>
+              <Layout>
+                <TradeRequest />
+              </Layout>
+            </Suspense>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/wishlist"
+        element={
+          <ProtectedRoute redirectTo={"/login"}>
+            <Suspense fallback={<FullScreenLoader />}>
+              <Layout>
+                <Wishlist />
+              </Layout>
+            </Suspense>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/order-placed"
+        element={
+          <ProtectedRoute redirectTo={"/login"}>
+            <Suspense fallback={<FullScreenLoader />}>
+              <Layout>
+                <OrderPlaced />
+              </Layout>
+            </Suspense>
+          </ProtectedRoute>
         }
       />
       <Route

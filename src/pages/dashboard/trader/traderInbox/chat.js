@@ -8,10 +8,19 @@ export default function Messages(props) {
   // const { user, token } = useSelector((state) => state.authReducer); // CURRENT USER
 
   const [message, setMessage] = useState(""); // new message
-  const [messages] = useState([]); // all messages
+  const [messages, setMessages] = useState([
+    { message: "hello", sendBy: "niaz" },
+  ]); // all messages
+
+  const onsubmit = () => {
+    let arr = [...messages];
+    arr.push({ message: message, sendby: "niaz" });
+    setMessages(arr);
+    setMessage("");
+  };
   return (
     <>
-      <main>
+      <main style={{ height: "70vh" }}>
         <header>
           <nav className="navbar ">
             <div className="navbar_left">
@@ -24,10 +33,12 @@ export default function Messages(props) {
               >
                 <FaBars />
               </div>
-              <img src={recipient.image} width={55} height={55} alt="" />
+              {recipient?.image && (
+                <img src={recipient?.image} width={55} height={55} alt="" />
+              )}
               <div className="info-wrapper">
                 <h2 className="fs-2">
-                  {recipient.firstName} {recipient.lastName}
+                  {recipient?.firstName} {recipient?.lastName}
                 </h2>
                 <h4 className="fs-4">offline 45 min ago</h4>
               </div>
@@ -39,7 +50,7 @@ export default function Messages(props) {
             </div>
           </nav>
         </header>
-        <ul id="chat">
+        <ul id="chat" className="bg-black-pad my-5 " style={{ height: "45vh" }}>
           {messages.length > 0 ? (
             messages.map((element, index) => {
               return (
@@ -63,14 +74,14 @@ export default function Messages(props) {
             <div className="d-flex justify-content-center  align-items-center">
               <center>
                 <img
-                  src={Images.Pictures.chat}
+                  src={Images?.Pictures?.chat}
                   alt="misssing chat"
                   style={{ width: "20rem", height: "17rem" }}
                 />
                 <br />
                 <p className="mt-4">
-                  You Haven't Started a Convesaton with {recipient.firstName}{" "}
-                  {recipient.lastName}
+                  You Haven't Started a Convesaton with {recipient?.firstName}{" "}
+                  {recipient?.lastName}
                 </p>
               </center>
             </div>
@@ -82,11 +93,10 @@ export default function Messages(props) {
             <textarea
               rows="1"
               name="message"
+              value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Type your message here..."
-            >
-              {message}
-            </textarea>
+            ></textarea>
             <button
               className="btn"
               disabled={message.length === 0}

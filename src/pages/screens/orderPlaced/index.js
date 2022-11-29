@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { FaArrowLeft, FaCheckCircle } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
 export default function ContactUs() {
+  const navigate = useNavigate();
   const [type, setType] = useState("service"); //eslint-disable-line
   return (
     <>
@@ -34,7 +35,10 @@ export default function ContactUs() {
           </div>
           <div className="col-6">
             <h3
-              className="fs-3 mb-5"
+              onClick={() => {
+                navigate("/orders-info");
+              }}
+              className="fs-3 mb-5 cursor-pointer"
               style={{
                 textAlign: "right",
                 width: "fit-content",

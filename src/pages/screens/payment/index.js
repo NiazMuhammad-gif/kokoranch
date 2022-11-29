@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-
+import Popup from "../../../components/popUp/popUp";
 import { Controller, useForm } from "react-hook-form";
+import { Link, Navigate } from "react-router-dom";
 import Images from "../../../constants/images";
+import { TiTick } from "react-icons/ti";
+import { FaExclamation } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 export default function Payment() {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const {
     handleSubmit,
     control,
@@ -12,7 +16,8 @@ export default function Payment() {
     // getValues,
   } = useForm();
   const [loading, setLoading] = useState(false);
-
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [successfulPopup, setSuccessfulPopup] = useState(false);
   const handleOrder = async (values) => {
     console.log(values);
     setLoading(true);
@@ -39,6 +44,63 @@ export default function Payment() {
 
   return (
     <>
+      <Popup open={popupOpen} setOpen={setPopupOpen}>
+        <div className="soi-update-status">
+          <div className="successful-popup">
+            <div className="sp-icon">
+              <FaExclamation size={30} fill="black" />
+            </div>
+            <h3>
+              Are You Sure You
+              <br />
+              Want To Pay?
+            </h3>
+          </div>
+          <div className="soi-popup-btns d-flex">
+            <button
+              className="btn btn-solid btn-solid-cancel btn-outline-primary soi-popup-btn"
+              onClick={() => {
+                setPopupOpen(false);
+              }}
+            >
+              Cancel
+            </button>
+            <button
+              className="btn btn-solid btn-solid-primary  soi-popup-btn"
+              onClick={() => {
+                // setSuccessfulPopup(true);
+                setPopupOpen(false);
+                navigate("/order-placed");
+              }}
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </Popup>
+      <Popup open={successfulPopup} setOpen={setSuccessfulPopup}>
+        <div className="successful-popup">
+          <div className="sp-icon">
+            <TiTick size={30} fill="black" />
+          </div>
+
+          <h3>
+            Payment Successful
+            <br />
+            Your Product Is Featured For 1 Week.
+          </h3>
+
+          <button
+            className="btn btn-solid btn-solid-primary soi-success-btn"
+            onClick={() => {
+              setSuccessfulPopup(false);
+              // navigate("/vendor-my-products");
+            }}
+          >
+            Close
+          </button>
+        </div>
+      </Popup>
       <div
         className="container mt-5 payment-wrapper"
         style={{
@@ -68,7 +130,12 @@ export default function Payment() {
           }}
           alt="signup"
         ></img>
-        <h2 className=" fs-2 mb-4">Payment</h2>
+        <label
+          className=" mb-5"
+          style={{ letterSpacing: "5px", fontSize: "25px" }}
+        >
+          Enter Card / Account Details
+        </label>
         <div className="row">
           <div className="col-md-8 col-sm-12 payment-wrapper_tabs">
             <ul class="nav  nav-tabs" id="myTab" role="tablist">
@@ -86,9 +153,8 @@ export default function Payment() {
                   <img
                     width="80"
                     height="50"
-                    sr
+                    src={Images.Pictures.tabPayments[0]}
                     alt="signup"
-                    c={Images.Pictures.tabPayments[0]}
                   ></img>
                 </button>
               </li>
@@ -106,9 +172,8 @@ export default function Payment() {
                   <img
                     width="80"
                     height="50"
-                    sr
+                    src={Images.Pictures.tabPayments[1]}
                     alt="signup"
-                    c={Images.Pictures.tabPayments[1]}
                   ></img>
                 </button>
               </li>
@@ -126,9 +191,8 @@ export default function Payment() {
                   <img
                     width="80"
                     height="50"
-                    sr
+                    src={Images.Pictures.tabPayments[2]}
                     alt="signup"
-                    c={Images.Pictures.tabPayments[2]}
                   ></img>
                 </button>
               </li>
@@ -146,9 +210,8 @@ export default function Payment() {
                   <img
                     width="80"
                     height="50"
-                    sr
+                    src={Images.Pictures.tabPayments[3]}
                     alt="signup"
-                    c={Images.Pictures.tabPayments[3]}
                   ></img>
                 </button>
               </li>
@@ -166,9 +229,8 @@ export default function Payment() {
                   <img
                     width="80"
                     height="50"
-                    sr
+                    src={Images.Pictures.tabPayments[4]}
                     alt="signup"
-                    c={Images.Pictures.tabPayments[4]}
                   ></img>
                 </button>
               </li>
@@ -186,9 +248,8 @@ export default function Payment() {
                   <img
                     width="80"
                     height="50"
-                    sr
+                    src={Images.Pictures.tabPayments[5]}
                     alt="signup"
-                    c={Images.Pictures.tabPayments[5]}
                   ></img>
                 </button>
               </li>
@@ -207,7 +268,7 @@ export default function Payment() {
                     id="my-form"
                     onSubmit={handleSubmit(handleOrder)}
                   >
-                    <div className="row">
+                    <div className="row mb-4">
                       <div className="col-md-6 col-sm-12 mt-4">
                         <label htmlFor="card-number" className="form-label">
                           CARD NUMBER
@@ -234,7 +295,7 @@ export default function Payment() {
                         ></Controller>
                       </div>
                     </div>
-                    <div className="row">
+                    <div className="row mb-4">
                       <div className="col-md-6 col-sm-12 mt-4">
                         <label htmlFor="card-name" className="form-label">
                           CARDHOLDER NAME
@@ -261,7 +322,7 @@ export default function Payment() {
                         ></Controller>
                       </div>
                     </div>
-                    <div className="row">
+                    <div className="row mb-4">
                       <div className="col-md-6 col-sm-12 mt-4">
                         <label htmlFor="card-expiry" className="form-label">
                           EXPIRE DATE
@@ -287,6 +348,23 @@ export default function Payment() {
                           }}
                         ></Controller>
                       </div>
+                      {/* <div className="col-12 mt-5">
+                        {loading && (
+                          <div
+                            className="spinner-border"
+                            style={{
+                              width: "3rem",
+                              height: "3rem",
+                              marginTop: "2rem",
+                            }}
+                            role="status"
+                          >
+                            <span className="visually-hidden">Loading...</span>
+                          </div>
+                        )}
+                      </div> */}
+                    </div>
+                    <div className="row mb-4">
                       <div className="col-md-6 col-sm-12 mt-4">
                         <label htmlFor="card-cvv" className="form-label">
                           CVV
@@ -311,25 +389,6 @@ export default function Payment() {
                             );
                           }}
                         ></Controller>
-                      </div>
-                      <div className="col-12 mt-5">
-                        {loading ? (
-                          <div
-                            className="spinner-border"
-                            style={{
-                              width: "3rem",
-                              height: "3rem",
-                              marginTop: "2rem",
-                            }}
-                            role="status"
-                          >
-                            <span className="visually-hidden">Loading...</span>
-                          </div>
-                        ) : (
-                          <button className="btn btn-solid btn-solid-primary py-3 px-5">
-                            Pay now
-                          </button>
-                        )}
                       </div>
                     </div>
                   </form>
@@ -382,17 +441,31 @@ export default function Payment() {
             <div className="checkout-summery-wrapper">
               <h3 className="fs-3 "> Summery</h3>
               <div className="cart-summery-wrapper_inner-wrapper">
-                <p>items(4)</p>
+                <p>Price (3 items)</p>
                 <h5 className="fs-5">usd.22</h5>
               </div>
               <div className="cart-summery-wrapper_inner-wrapper">
-                <p>Delivery Charges</p>
+                <p>Shipping Charges</p>
                 <h5 className="fs-5">usd.22</h5>
               </div>
               <div className="cart-summery-wrapper_inner-wrapper">
-                <p>Total</p>
+                <p>Total Amount</p>
                 <h5 className="fs-5">usd.22</h5>
               </div>
+              {/* <Link
+                to="/payment"
+                className="btn btn-solid btn-solid-primary-rounded px-5 cart-summery-wrapper_button"
+              > */}
+              <button
+                onClick={() => {
+                  setPopupOpen(true);
+                }}
+                className="btn btn-solid btn-solid-primary-rounded px-5 cart-summery-wrapper_button"
+                form="my-form"
+              >
+                Pay Now
+              </button>
+              {/* </Link> */}
             </div>
           </div>
         </div>

@@ -8,7 +8,6 @@ import InfoDetails from "./InfoDetails";
 
 export default function MyProfile() {
   const [formChange, setFormChange] = useState(false);
- 
 
   return (
     <UserSideMenu>
@@ -34,18 +33,14 @@ export default function MyProfile() {
         </h2>
         <div className="row my-profile-wrapper_inner-wrapper">
           {formChange === "info-form" ? (
-            <InfoForm
-              setFormChange={setFormChange}
-              
-            />
+            <InfoForm setFormChange={setFormChange} />
           ) : formChange === "password-form" ? (
-            <PasswordChangeForm  setFormChange={setFormChange} />
+            <PasswordChangeForm setFormChange={setFormChange} />
           ) : (
             <InfoDetails setFormChange={setFormChange} />
           )}
         </div>
       </div>
-      
     </UserSideMenu>
   );
 }

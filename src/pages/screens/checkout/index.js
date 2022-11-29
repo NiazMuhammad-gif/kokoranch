@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import Images from "../../../constants/images";
 
 export default function Checkout() {
@@ -23,8 +24,8 @@ export default function Checkout() {
         className="container mt-5"
         style={{
           position: "relative",
-          top: "20rem",
-          left: "40rem",
+          top: "0rem",
+          // left: "40rem",
         }}
       >
         <img
@@ -348,12 +349,17 @@ export default function Checkout() {
                   <span className="visually-hidden">Loading...</span>
                 </div>
               ) : (
-                <button
+                <Link
+                  to="/payment"
                   className="btn btn-solid btn-solid-primary-rounded px-5 cart-summery-wrapper_button"
-                  form="my-form"
                 >
+                  {/* <button
+                    className="btn btn-solid btn-solid-primary-rounded px-5 cart-summery-wrapper_button"
+                    form="my-form"
+                  > */}
                   Proceed to pay
-                </button>
+                  {/* </button> */}
+                </Link>
               )}
             </div>
           </div>

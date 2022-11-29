@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaAngleLeft, FaCamera } from "react-icons/fa";
+import { FaAngleLeft, FaCamera, FaExclamation } from "react-icons/fa";
 import Images from "../../../../constants/images";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -7,6 +7,8 @@ import {
   CREATE_TRADE_ACTION,
   DELETE_TRADE_ACTION,
 } from "../../../../redux/actions/trades";
+import Popup from "../../../../components/popUp/popUp";
+import { TiTick } from "react-icons/ti";
 export default function Trade({
   editAble,
   setEditAble,
@@ -16,6 +18,8 @@ export default function Trade({
   setRecordForEdit,
   newRecord,
 }) {
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [successfulPopup, setSuccessfulPopup] = useState(false);
   const dispatch = useDispatch();
   const { editTradeInfo, updateTrade, deleteTrade, newTrade } = useSelector(
     (state) => state.TradesReducers
@@ -39,7 +43,9 @@ export default function Trade({
   const [selectedImages, setselectedImages] = useState([]);
 
   const handleEditTradeInfo = (e) => {
+    console.log("first");
     if (editAble && newRecord == false) {
+      setPopupOpen(true);
       // dispatch(
       //   UPDATE_TRADE_TRADE_ACTION(
       //     editTradeInfo._id,
@@ -48,6 +54,8 @@ export default function Trade({
       //   )
       // );
     } else if (newRecord) {
+      console.log("first");
+      setPopupOpen(true);
       // dispatch(CREATE_TRADE_ACTION(trade, localStorage.getItem("token")));
     }
   };
@@ -76,6 +84,71 @@ export default function Trade({
   // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <>
+      <Popup open={popupOpen} setOpen={setPopupOpen}>
+        <div className="soi-update-status">
+          <div className="successful-popup">
+            <div className="sp-icon">
+              <FaExclamation size={30} fill="black" />
+            </div>
+            {editAble && newRecord == false ? (
+              <h3>
+                Are You Sure You Want
+                <br />
+                To Update Trade Details?
+              </h3>
+            ) : (
+              <h3>
+                Are You Sure You
+                <br />
+                Want To Upload?
+              </h3>
+            )}
+          </div>
+          <div className="soi-popup-btns d-flex">
+            <button
+              className="btn btn-solid btn-solid-cancel btn-outline-primary soi-popup-btn"
+              onClick={() => {
+                setPopupOpen(false);
+              }}
+            >
+              Cancel
+            </button>
+            <button
+              className="btn btn-solid btn-solid-primary  soi-popup-btn"
+              onClick={() => {
+                setPopupOpen(false);
+                setSuccessfulPopup(true);
+              }}
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </Popup>
+      <Popup open={successfulPopup} setOpen={setSuccessfulPopup}>
+        <div className="successful-popup">
+          <div className="sp-icon">
+            <TiTick size={30} fill="black" />
+          </div>
+          {editAble && newRecord == false ? (
+            <h3>
+              Details Updated <br />
+              Successfully
+            </h3>
+          ) : (
+            <h3>
+              Updated <br />
+              Successfully
+            </h3>
+          )}
+          <button
+            className="btn btn-solid btn-solid-primary soi-success-btn"
+            onClick={() => setSuccessfulPopup(false)}
+          >
+            Continue
+          </button>
+        </div>
+      </Popup>
       <div className="single-trade">
         {!editAble && (
           <div className="single-trade_top">
