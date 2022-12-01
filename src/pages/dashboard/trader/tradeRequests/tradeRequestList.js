@@ -246,31 +246,6 @@ export default function TradeList({ setView, view }) {
             </div>
           </div>
         </header>
-
-        {/* <div className="table-content table-container">
-          <table className="table table-container__table table-container__table--break-md">
-            <thead>
-              <tr>
-                <th className="li-product-remove">Trade Code</th>
-                <th className="li-product-thumbnail">In Search Of</th>
-                <th className="cart-product-name">Exchange With</th>
-                <th className="li-product-price">Unread Comments</th>
-                <th className="li-product-price">Last Commented Date</th>
-                <th
-                  className="li-product-subtotal"
-                  style={{ textAlign: "left" }}
-                >
-                  Action
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {traderTrades?.map((order, index) => {
-                return <TradeRequestItem props={order} setView={setView} />;
-              })}
-            </tbody>
-          </table>
-        </div> */}
         <TableComponent
           edit={"tradeRequest"}
           tHeadData={tableHeadData}
