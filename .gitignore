@@ -10,8 +10,7 @@
 
 # production
 /build
-package-lock.json
-yarn.lock
+
 netlify.toml
 
 # misc
